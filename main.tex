@@ -1,0 +1,36 @@
+%! TEX program = xelatex
+%! TEX encoding = UTF-8 Unicode
+% ── Magic comments end ────────────────────────────────────────────────
+%          ╭──────────────────────────────────────────────────────────╮
+%          │                 Journal Article Template                 │
+%          ╰──────────────────────────────────────────────────────────╯
+\documentclass{elsarticle}
+\bibliographystyle{elsarticle-num}
+
+% ── Package ───────────────────────────────────────────────────────────
+\usepackage{amsmath,amssymb,amsfonts,amsthm,bm} % mathamatics
+\usepackage{graphicx} % figures
+\usepackage{booktabs,multirow} % tables
+\usepackage{hyperref} % hyperlinks
+\usepackage{lineno} % line number
+\linenumbers % turn on line number
+
+% ── Main ──────────────────────────────────────────────────────────────
+\begin{document}
+\include{frontmatter}
+\include{introduction}
+%                                                            ▲
+%   Other chapters can be added here.                        █
+%   \include{methodology}                                    █
+%   \include{examples}                                       █
+%   \include{conclusion}                                     █
+%                                                            ▼
+\section*{Acknowledgment}
+The support of this work by the National Natural Science Foundation of China (xxxxxxxx) and the Natural Science Foundation of Fujian Province of China (xxxxxxxxxx) is gratefully acknowledged.
+\appendix
+%                                                            ▲
+%   Appendix is added here.                                  █
+%   \include{appendix}                                       █
+%                                                            ▼
+\bibliography{references}
+\end{document}
