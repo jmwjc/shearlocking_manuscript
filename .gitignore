@@ -1,0 +1,60 @@
+# macOS specific files
+.DS_Store
+.AppleDouble
+.LSOverride
+.vscode/
+
+# macOS system files
+Icon?
+._*
+
+# Thumbnails
+Thumbs.db
+
+# LaTeX intermediate and output files
+*.aux
+*.bbl
+*.blg
+*.brf
+*.idx
+*.ilg
+*.ind
+*.lof
+*.log
+*.lot
+*.out
+*.toc
+*.acn
+*.acr
+*.alg
+*.glg
+*.glo
+*.gls
+*.ist
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.synctex(busy)
+*.pdfsync
+
+# Backup files
+*~
+*.bak
+*.sav
+*.swp
+*.tmp
+*.backup
+*.dvi
+
+# Generated PDF files
+# *.pdf
+
+# Other intermediate files
+*.ps
+*.eps
+*.snm
+*.nav
+*.vrb
+*.spl
+*.run.xml
+*.bcf
