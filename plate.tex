@@ -1,0 +1,179 @@
+\section{Reissner--Mindlin plate formulation}
+
+\subsection{Governing equations for Mindlin plate}
+
+Consider a thick plate $\Omega\times [-\frac{t}{2},\frac{t}{2}]$ with its mid-surface $\Omega$ and thickness $t$ in a Cartesian coordinate system, as shown in Figure, where $x_\alpha,\; \alpha=1,2$ are the in-plane coordinates on $\Omega$ and $x_3$ is the coordinate for the thickness direction. 
+In accordance with Reissner-Mindlin hypothesis and inconsideration of the in-plane displacement of $\Omega$, the displacement $u_i,\; i = 1,2,3$ are given as follows:
+\begin{equation} 
+    \left\{
+    \begin{aligned}
+        u_\alpha(\boldsymbol x) &= - x_3 \varphi_\alpha(x_1, x_2) \\
+        u_3(\boldsymbol x) &= w(x_1, x_2)
+    \end{aligned}
+    \right.
+    , \quad \alpha = 1, 2
+\end{equation}
+where $w$ stands for the deflection and $\varphi_\alpha$ presents $\alpha$th direction component for rotation $\boldsymbol \varphi$.
+The corresponding infinitesimal strain components $\varepsilon_{ij}$ are listed as follows:
+\begin{equation}
+    \left\{
+    \begin{aligned}
+        \varepsilon_{\alpha\beta} &= \frac{1}{2} (u_{\alpha,\beta} + u_{\beta,\alpha})
+        = x_3 \kappa_{\alpha\beta} \\
+        \varepsilon_{\alpha 3} &= \frac{1}{2} \gamma_\alpha \\
+        \varepsilon_{33} &= 0
+    \end{aligned}
+    \right.
+\end{equation}
+in which $\kappa_{\alpha\beta}$ and $\gamma_\alpha$ are the components for the in-plane curvature $\boldsymbol \kappa$ and shear strain $\boldsymbol \gamma$ respectively, the $\boldsymbol \kappa$ and $\boldsymbol \gamma$ are defined as:
+\begin{align}
+    \boldsymbol \kappa &= - \frac{1}{2} (\nabla \boldsymbol \varphi+\boldsymbol \varphi \nabla )
+    \\
+    \boldsymbol \gamma &= \nabla w - \boldsymbol \varphi
+\end{align}
+
+According to the isotropic Mindlin plate theory \cite{hughes2000}, the stress components $\sigma_{ij}$ are given as follows:
+\begin{equation}
+    \left\{
+    \begin{aligned}
+        \sigma_{\alpha\beta} &= D_{\alpha\beta\gamma\eta} \varepsilon_{\gamma\eta} \\
+        \sigma_{\alpha 3} &= G \gamma_\alpha \\
+        \sigma_{33} &= 0
+    \end{aligned}
+    \right.
+\end{equation}
+where $D_{\alpha\beta\gamma\eta}$ is denoted as the component for the fourth-order in-plane constitutive tensor $\boldsymbol D$ and $G$ is shear modulus, and they can be evaluated by Young's modulus $E$, Poisson's ratio $\nu$ as:
+\begin{align}
+    \boldsymbol D &=
+    \frac{E}{1-\nu^2} \left (
+        \nu \boldsymbol 1\otimes \boldsymbol 1 + \frac{1}{2}(1-\nu) \boldsymbol I
+    \right )
+    \\
+    G &= \frac{E}{2(1+\nu)}
+\end{align}
+in which $\boldsymbol 1 = \delta_{\alpha\beta} \boldsymbol e_i\otimes \boldsymbol e_j$ and
+$\boldsymbol I = \delta_{\alpha\gamma}\delta_{\beta\eta} + \delta_{\alpha\eta}\delta_{\beta\gamma} \boldsymbol e_\alpha \otimes \boldsymbol e_\beta \otimes \boldsymbol e_\gamma \otimes \boldsymbol e_\eta$ 
+represent the second- and fourth-order identity tensors,
+and $\delta_{\alpha\beta}$ is Kronecker delta function. 
+Further integrating the stress components through the thickness direction, we can obtain the moment resultant $\boldsymbol m$ and shear force resultant $\boldsymbol q$, given as follows:
+\begin{align}
+    \boldsymbol m &= \int_{-t/2}^{t/2} \sigma_{\alpha\beta} dx_3 \boldsymbol e_\alpha \otimes \boldsymbol e_\beta = 
+    \frac{t^3}{12} \boldsymbol D : \boldsymbol \kappa \\
+    \boldsymbol q &= k\int_{-t/2}^{t/2} \sigma_{\alpha 3} dx_3 \boldsymbol e_\alpha =
+    kGt \boldsymbol \gamma
+\end{align}
+where $k$ presents the shear correction factor that is chosen as $k=\frac{4}{5}$ in this work. 
+It should be noted that, the geometric parameter for the moment resultant has two more order power of thickness than shear force resultant.
+As the thickness reducing, the parameter for the moment resultant will much less than that for shear force resultant,
+for a specific external force, leading to a constraint of shear strain trending to be zero, i.e. $t\rightarrow 0, \boldsymbol \gamma \rightarrow \boldsymbol 0$. 
+
+Consequently, the governing equations for Reissner-Mindlin plate can be expressed as follows:
+\begin{equation}
+\left \{
+\begin{aligned}
+\nabla \cdot \boldsymbol m - \boldsymbol q &= \boldsymbol 0 & &\textrm{in}\; \Omega \\
+\nabla \cdot \boldsymbol q + \bar p &= 0 & &\textrm{in}\; \Omega \\
+\boldsymbol q \cdot \boldsymbol  n &= \bar q_n & &\textrm{on}\; \Gamma_q \\
+\boldsymbol m \cdot \boldsymbol n &= \bar{\boldsymbol m} & &\textrm{on}\; \Gamma_m \\
+\boldsymbol \varphi &= \bar{\boldsymbol \varphi} & &\textrm{on}\; \Gamma_\varphi \\
+w &= \bar w & &\textrm{on}\; \Gamma_w \\
+\end{aligned}
+\right .
+\end{equation}
+where $\bar p$ is the transverse load,
+$\bar q_n$ and $\bar{\boldsymbol m}$ are the prescribed shear force and moment on the natural boundary $\Gamma_q$ and $\Gamma_m$ respectively,
+$\bar w$ and $\bar{\boldsymbol \varphi}$ are the prescribed deflection and rotation on the essential boundary $\Gamma_w$ and $\Gamma_\varphi$ respectively,
+and $\boldsymbol n$ is the unit outward normal vector on the boundary.
+All the boundary segments satisfy the following relationship:
+\begin{equation}
+\Gamma_q \cup \Gamma_m = \Gamma_w \cup \Gamma_\varphi = \Gamma
+,\quad
+\Gamma_w \cap \Gamma_\varphi = \Gamma_q \cap \Gamma_m = \varnothing
+\end{equation}
+and $\Gamma$ is the boundary of $\Omega$.
+
+
+\subsection{Mixed--formulation}
+
+The thick plate Galerkin formulation generally use the three-variable weak form to immigrate the locking issue. 
+To obtain the corresponding Galerkin weak form, the complementary energy functional is given by: 
+\begin{equation}
+    \begin{aligned}
+        \Pi(\boldsymbol u, \boldsymbol q) &=
+        \int_\Omega \frac{t^3}{24} \boldsymbol \kappa : \boldsymbol D : \boldsymbol \kappa d\Omega - \int_\Omega \frac{1}{2kGt} \boldsymbol q \cdot \boldsymbol q d\Omega - \int_\Omega \boldsymbol \varphi \cdot \boldsymbol q d\Omega \\
+        &+ \int_{\Gamma_w} \boldsymbol q \cdot \boldsymbol n \bar w d\Gamma + \int_{\Gamma_m} \boldsymbol \varphi \cdot \bar{\boldsymbol m} d\Gamma + \int_{\Gamma_q} w (\boldsymbol q \cdot \boldsymbol n - \bar q_n) d\Gamma \\&- \int_\Omega w (\nabla \cdot \boldsymbol q + \bar p) d\Omega
+    \end{aligned}
+\end{equation}
+where $\boldsymbol u$ stands for a displacement set containing deflection $w$ and rotation $\boldsymbol \varphi$, i.e. $\boldsymbol u = \{w,\boldsymbol \varphi\}$.
+Introducing the standard variational operation herein leads to the following Galerkin weak form:
+find $w \in W$, $\boldsymbol \varphi \in \Phi$, $\boldsymbol q \in Q$,
+\begin{equation}\label{eq:weak_form}
+\begin{aligned}
+a(\delta \boldsymbol \varphi, \boldsymbol \varphi) + b_{\varphi}(\delta\boldsymbol \varphi,\boldsymbol q) &= f_{\varphi}(\delta \boldsymbol \varphi), & \forall \delta \boldsymbol \varphi \in \Phi \\
+b_{w}(\delta w,\boldsymbol q) &= f_{w}(\delta w), & \forall \delta w \in W \\
+b(\boldsymbol u,\delta \boldsymbol q) &= f_{q}(\delta \boldsymbol q), & \forall \delta \boldsymbol q \in Q
+\end{aligned}
+\end{equation}
+where the deflection space $W$, rotation space $\Phi$ and shear force space $Q$ are defined as:
+\begin{align}
+    W &:= \{\} \\
+    \Phi &:= \{\} \\
+    Q &:= \{\}
+\end{align}
+and the bilinear forms and linear forms in Eq. \eqref{eq:weak_form} are detailed as follows: 
+\begin{align}
+% &a: \Phi \times \Phi \rightarrow \mathbb R &
+a(\delta\boldsymbol \varphi,\boldsymbol \varphi) &= \int_\Omega \delta \boldsymbol \kappa : \frac{t^3}{12} \boldsymbol D : \boldsymbol \kappa d\Omega \\
+% &b: (W\times \Phi)\times Q \rightarrow \mathbb R &
+b(\boldsymbol u, \boldsymbol q) &= b_w(w, \boldsymbol q) + b_\varphi(\boldsymbol \varphi, \boldsymbol q) \\
+% &b_\varphi : \Phi\times Q \rightarrow \mathbb R &
+b_{\varphi}(\boldsymbol \varphi, \boldsymbol q) &= -\int_{\Omega}\boldsymbol \varphi \cdot \boldsymbol q d\Omega \\
+% &b_w : W\times Q \rightarrow \mathbb R &
+\begin{split}
+b_{w}(w,\boldsymbol q) &= \int_{\Gamma_{q}} w \boldsymbol q \cdot \boldsymbol nd\Gamma - \int_{\Omega}w \nabla \cdot \boldsymbol qd\Omega \\
+&= \int_\Omega \nabla w \cdot \boldsymbol q d\Omega - \int_{\Gamma_w} w \boldsymbol q \cdot \boldsymbol n d\Gamma
+\end{split} \\
+% &f_\varphi: \Phi \rightarrow \mathbb R &
+f_{\varphi}(\boldsymbol \varphi) &= - \int_{\Gamma_{m}} \boldsymbol \varphi \cdot \bar{\boldsymbol m}d\Gamma \\
+% &f_w: W\rightarrow \mathbb R &
+f_{w}(w) &= \int_{\Gamma_{q}} w \bar{q}_n d\Gamma + \int_{\Omega}w \bar{p} d\Omega \\
+% &f_q: Q\rightarrow \mathbb R &
+f_{q}(\boldsymbol q) &= - \int_{\Gamma_{w}} \boldsymbol q \cdot \boldsymbol n \bar{w} d\Gamma
+\end{align}
+
+Furthermore, we introduce the approximation schemes to discrete these three variables, namely $w_h$, $\boldsymbol \varphi_h$, $\boldsymbol q_h$, these approximants are represented by shape functions $N_I^w$, $N_K^\varphi$, $N_M^q$ and their corresponding nodal coefficients $w_I$, $\boldsymbol \varphi_K$, $\boldsymbol q_M$ respectively, yields:
+\begin{equation}\label{ep:approximant}
+    \left \{
+    \begin{aligned}
+        w_h(\boldsymbol x) &= \sum_{I=1}^{n_w} N_I^w(\boldsymbol x) w_I \\
+        \boldsymbol \varphi_h(\boldsymbol x) &= \sum_{K=1}^{n_\varphi} N_K^\varphi \boldsymbol \varphi_K \\
+        \boldsymbol q_h(\boldsymbol x) &= \sum_{R=1}^{n_q} N_R^q(\boldsymbol x) \boldsymbol q_R
+    \end{aligned}
+    \right .
+\end{equation}
+Substituting Eq. \eqref{ep:approximant} back into Eq. \eqref{eq:weak_form} can obtain the Galerkin weak formulation:
+find $w_h \in W_h$, $\boldsymbol \varphi_h \in \Phi_h$, $\boldsymbol q_h \in Q_h$,
+\begin{equation}\label{eq:weak_form_discrete}
+\begin{aligned}
+a(\delta \boldsymbol \varphi_h, \boldsymbol \varphi_h) + b_{\varphi}(\delta\boldsymbol \varphi_h,\boldsymbol q_h) &= f_{\varphi}(\delta \boldsymbol \varphi_h), & \forall \delta \boldsymbol \varphi_h \in \Phi_h \\
+b_{w}(\delta w_h,\boldsymbol q_h) &= f_{w}(\delta w_h), & \forall \delta w_h \in W_h \\
+b(\boldsymbol u_h,\delta \boldsymbol q_h) &= f_{q}(\delta \boldsymbol q_h), & \forall \delta \boldsymbol q_h \in Q_h
+\end{aligned}
+\end{equation}
+where $\boldsymbol u_h = \{w_h, \boldsymbol \varphi_h\}$. The related approximation spaces are defined as:
+\begin{align}
+    W_h &:= \mathrm{span} \{N_I\}_{I=1}^{n_w} \\
+    \Phi_h &:= \mathrm{span} \{N_K\}_{K=1}^{n_\varphi} \\
+    Q_h &:= \mathrm{span} \{N_R\}_{R=1}^{n_q}
+\end{align}
+FIXME: approximation types
+
+\begin{rmk}
+    As shown in Eq. \eqref{eq:weak_form_discrete}, there are two constraints in thick plate mixed formulation. One, as listed in third line of Eq. \eqref{eq:weak_form_discrete}, is a mixed constraint regarding the shear in entire domain and deflection on essential deflection boundary. 
+    The other is the transverse force enforcement in whole domain.
+    However, for most of pinoneer work, only consider the shear constraint, and that is not sufficient for a satisfaction result.
+\end{rmk}
+
+\begin{rmk}
+
+\end{rmk}

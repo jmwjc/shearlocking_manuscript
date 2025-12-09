@@ -1,12 +1,112 @@
-@article{wu2021,
-  title = {An Accuracy Analysis of {{Galerkin}} Meshfree Methods Accounting for Numerical Integration},
-  author = {Wu, Junchao and Wang, Dongdong},
-  year = {2021},
-  month = mar,
+@article{arnoldLockingfreeFiniteElement1997,
+  title = {Locking-Free Finite Element Methods for Shells},
+  author = {Arnold, Douglas N. and Brezzi, Franco},
+  year = {1997},
+  month = jan,
+  journal = {Mathematics of Computation},
+  volume = {66},
+  number = {217},
+  pages = {1--15},
+  issn = {0025-5718},
+  urldate = {2021-11-26},
+  abstract = {We propose a new family of finite element methods for the Naghdi shell model, one method associated with each nonnegative integer k. The methods are based on a nonstandard mixed formulation, and the kth method employs triangular Lagrange finite elements of degree k +2 augmented by bubble functions of degree k + 3 for both the displacement and rotation variables, and discontinuous piecewise polynomials of degree k for the shear and membrane stresses. This method can be implemented in terms of the displacement and rotation variables alone, as the minimization of an altered energy functional over the space mentioned. The alteration consists of the introduction of a weighted local projection into part, but not all, of the shear and membrane energy terms of the usual Naghdi energy. The relative error in the method, measured in a norm which combines the H1 norm of the displacement and rotation fields and an appropriate norm of the shear and membrane stress fields, converges to zero with order k + 1 uniformly with respect to the shell thickness for smooth solutions, at least under the assumption that certain geometrical coefficients in the Nagdhi model are replaced by piecewise constants.},
+  langid = {english},
+  file = {/Users/wujunchao/Zotero/storage/6IMCIALT/Arnold and Brezzi - 1997 - Locking-free finite element methods for shells.pdf}
+}
+
+@article{beiraodaveigaAvoidingShearLocking2012,
+  title = {Avoiding Shear Locking for the {{Timoshenko}} Beam Problem via Isogeometric Collocation Methods},
+  author = {{Beir{\~a}o da Veiga}, L. and Lovadina, C. and Reali, A.},
+  year = {2012},
+  month = oct,
   journal = {Computer Methods in Applied Mechanics and Engineering},
-  volume = {375},
-  pages = {113631},
+  volume = {241--244},
+  pages = {38--51},
+  issn = {00457825},
+  urldate = {2021-03-11},
+  abstract = {In this work we study isogeometric collocation methods for the Timoshenko beam problem, considering both mixed and displacement-based formulations. In particular, we show that locking-free solutions are obtained for mixed methods independently on the approximation degrees selected for the unknown fields. Moreover, several numerical tests are provided in order to support our theoretical results and to show the good behavior and the flexibility of isogeometric collocation methods in this context.},
+  langid = {english},
+  file = {/Users/wujunchao/Zotero/storage/RKFLT3ZA/Beirão da Veiga et al. - 2012 - Avoiding shear locking for the Timoshenko beam pro.pdf}
+}
+
+@article{erguvenMixedFiniteElement2003,
+  title = {A Mixed Finite Element Formulation for Timoshenko Beam on Winkler Foundation},
+  author = {Erg{\"u}ven, M. E. and Gedikli, A.},
+  year = {2003},
+  month = jul,
+  journal = {Computational Mechanics},
+  volume = {31},
+  number = {3},
+  pages = {229--237},
+  issn = {0178-7675, 1432-0924},
+  urldate = {2021-03-11},
+  abstract = {A mixed formulation for Timoshenko beam approximation including the effect of the shear interacelement on Winkler foundation has been derived by tions, such as in the Pasternak (1954) model.},
+  langid = {english},
+  file = {/Users/wujunchao/Zotero/storage/UXNPY35A/Ergüven and Gedikli - 2003 - A mixed finite element formulation for timoshenko .pdf}
+}
+
+@article{francaNewMixedFinite1991,
+  title = {A New Mixed Finite Element Method for the {{Timoshenko}} Beam Problem},
+  author = {Franca, Leopoldo P. and Loula, Abimael F. D.},
+  year = {1991},
+  journal = {ESAIM: Mathematical Modelling and Numerical Analysis},
+  volume = {25},
+  number = {5},
+  pages = {561--578},
+  issn = {0764-583X, 1290-3841},
+  urldate = {2021-03-11},
+  abstract = {The Timoshenko beam problem, with shear for ce and rotation as primai variables and displacement as Lagrange multiplier, is examined under the g{\^e}nerai hypotheses of Brezzi's theorem concerning existence and uniqueness of saddle point problems. A new finite element approximation is proposed and shown to be convergent for varions combinations of interpolations for the three variables.},
+  langid = {english},
+  file = {/Users/wujunchao/Zotero/storage/BQZB95BA/Franca and Loula - 1991 - A new mixed finite element method for the Timoshen.pdf}
+}
+
+@book{hughes2000,
+  title = {The {{Finite Element Method}}: {{Linear Static}} and {{Dynamic Finite Element Analysis}}},
+  author = {Hughes, Thomas J.R.},
+  year = {2000},
+  publisher = {Prentice Hall},
+  address = {New Jersey},
+  keywords = {oft-cited,significant},
+  file = {/Users/wujunchao/Zotero/storage/RYQMGZDY/Hughes - 2000 - The Finite Element Method Linear Static and Dynam.pdf}
+}
+
+@article{lepeLockingfreeFiniteElement2014,
+  title = {Locking-Free Finite Element Method for a Bending Moment Formulation of {{Timoshenko}} Beams},
+  author = {Lepe, Felipe and Mora, David and Rodr{\'i}guez, Rodolfo},
+  year = {2014},
+  month = aug,
+  journal = {Computers \& Mathematics with Applications},
+  volume = {68},
+  number = {3},
+  pages = {118--131},
+  issn = {0898-1221},
+  urldate = {2021-03-11},
+  abstract = {In this paper we study a finite element formulation for Timoshenko beams. It is known that standard finite elements applied to this model lead to wrong results when the thickness of the beam is small. Here, we consider a mixed formulation in terms of the transverse displacement, rotation, shear stress and bending moment. By using the classical Babu{\v s}ka--Brezzi theory, it is proved that the resulting variational formulation is well posed. We discretize it by continuous piecewise linear finite elements for the shear stress and bending moment, and discontinuous piecewise constant finite elements for the displacement and rotation. We prove an optimal (linear) order of convergence in terms of the mesh size for the natural norms and a double order (quadratic) in L2-norms for the shear stress and the bending moment. These estimates involve constants and norms of the solution that are proved to be bounded independently of the beam thickness, which ensures the locking-free character of the method. Numerical tests are reported in order to support our theoretical results.},
+  langid = {english},
+  file = {/Users/wujunchao/Zotero/storage/IG3DNAVK/Lepe et al. - 2014 - Locking-free finite element method for a bending m.pdf}
+}
+
+@article{mathewsComputationallyefficientLockingfreeIsogeometric2024,
+  title = {Computationally-Efficient Locking-Free Isogeometric Discretizations of Geometrically Nonlinear {{Kirchhoff}}--{{Love}} Shells},
+  author = {Mathews, Kyle Dakota and Casquero, Hugo},
+  year = {2024},
+  month = nov,
+  journal = {Computer Methods in Applied Mechanics and Engineering},
+  volume = {431},
+  pages = {117280},
   issn = {0045-7825},
-  urldate = {2020-12-28},
-  langid = {english}
+  urldate = {2024-08-21},
+  abstract = {Discretizations based on the Bubnov-Galerkin method and the isoparametric concept suffer from membrane locking when applied to Kirchhoff--Love shell formulations. Membrane locking causes not only smaller displacements than expected, but also large-amplitude spurious oscillations of the membrane forces. Continuous-assumed-strain (CAS) elements were originally introduced to remove membrane locking in quadratic NURBS-based discretizations of linear plane curved Kirchhoff rods (Casquero et al., CMAME, 2022). In this work, we propose CASs and CASns elements to overcome membrane locking in quadratic NURBS-based discretizations of geometrically nonlinear Kirchhoff--Love shells. CASs and CASns elements are interpolation-based assumed-strain locking treatments. The assumed strains have C0 continuity across element boundaries and different components of the membrane strains are interpolated at different interpolation points. CASs elements use the assumed strains to obtain both the physical strains and the virtual strains, which results in a global tangent matrix which is a symmetric matrix. CASns elements use the assumed strains to obtain only the physical strains, which results in a global tangent matrix which is a non-symmetric matrix. To the best of the authors' knowledge, CASs and CASns elements are the first assumed-strain treatments to effectively overcome membrane locking in quadratic NURBS-based discretizations of geometrically nonlinear Kirchhoff--Love shells while satisfying the following important characteristics for computational efficiency: (1) No additional unknowns are added, (2) No additional systems of algebraic equations need to be solved, (3) The same elements are used to approximate the displacements and the assumed strains, (4) No additional matrix operations such as matrix inversions or matrix multiplications are needed to obtain the stiffness matrix, and (5) The nonzero pattern of the stiffness matrix is preserved. Analogously to the interpolation-based assumed-strain locking treatments for Lagrange polynomials that are widely used in commercial FEA software, the implementation of CASs and CASns elements only requires to modify the subroutine that computes the element residual vector and the element tangent matrix. The benchmark problems show that CASs and CASns elements, using either 2 {\texttimes} 2 or 3 {\texttimes} 3 Gauss--Legendre quadrature points per element, are effective locking treatments since these element types result in more accurate displacements for coarse meshes and excise the spurious oscillations of the membrane forces.}
+}
+
+@book{timoshenko1951,
+  title = {Theory of {{Elasticity}}},
+  author = {Timoshenko, Stephen P and Goodier, J. N.},
+  year = {1951},
+  edition = {2nd Edition},
+  publisher = {McGraw-Hill Book Company},
+  address = {New York},
+  googlebooks = {ialLYAAACAAJ},
+  langid = {english},
+  file = {/Users/wujunchao/Zotero/storage/UPQM84RN/Timoshenko and Goodier - 1951 - Theory of Elasticity.pdf}
 }

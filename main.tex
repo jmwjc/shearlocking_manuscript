@@ -10,25 +10,29 @@
 % ── Package ───────────────────────────────────────────────────────────
 \usepackage[UTF8]{ctex} 
 \usepackage{amsmath,amssymb,amsfonts,amsthm,bm} % mathamatics
-\usepackage{graphicx} % figures
+\usepackage{graphicx,float,subcaption} % figures
 \usepackage{booktabs,multirow} % tables
 \usepackage{hyperref} % hyperlinks
 \usepackage{lineno} % line number
-\usepackage{float}
-\usepackage{subcaption}
+\newtheorem{thm}{Theorem}
+\newtheorem{rmk}{Remark}
+\newtheorem{lma}{Lemma}
+\newproof{pf}{Proof}
 \linenumbers % turn on line number
+\graphicspath{{figure/}}
 
 % ── Main ──────────────────────────────────────────────────────────────
 \begin{document}
 \include{frontmatter}
-\include{introduction}
-\include{shearlocking}
-%                                                            ▲
-%   Other chapters can be added here.                        █
-%   \include{methodology}                                    █
-%   \include{examples}                                       █
-%   \include{conclusion}                                     █
-%                                                            ▼
+\input{introduction}
+\input{plate}
+\input{shearlocking}
+\input{formulation}
+\section{Numerical examples}
+% \input{square}
+% \input{skew}
+% \input{circle}
+
 \section*{Acknowledgment}
 The support of this work by the National Natural Science Foundation of China (xxxxxxxx) and the Natural Science Foundation of Fujian Province of China (xxxxxxxxxx) is gratefully acknowledged.
 \appendix
