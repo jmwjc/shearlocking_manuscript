@@ -1,4 +1,4 @@
-\section{LBB coefficient estimator} \label{sec:estimator}
+\section{Complete-polynomial-based estimator for LBB coefficient} \label{sec:estimator}
 
 This appendix presents the detailed derivation of the LBB coefficient estimator used in this work.
 This estimator provides a quantitative measure of the stability of mixed finite element formulations just by counting the degree of freedoms (DOFs) of the approximation spaces. 
@@ -6,37 +6,38 @@ The main route of derivation follows the path proposed in Ref. \cite{wu2026}.
 Unlike the consideration of volumetric locking in \cite{wu2026}, here we focus on the general LBB condition for any locking issue. 
 Consider the following constraint servicing to a saddle-point problem: find $u \in U$ such that 
 \begin{equation}\label{eq:constraint}
-    b(u,p) = g(p), \quad  \forall p \in P
+    b(p,u) = g(p), \quad  \forall p \in P
 \end{equation}
 where $b: U\times P \to \mathbb R$, $g: P \to \mathbb R$ are bilinear and linear forms, respectively.
 For an any fixed $p\in P$, there exists a linear operator $\mathcal P: U \to P$ satisfying:
 \begin{equation}\label{eq:P}
-    b(u,p) = (\mathcal P u,p)
+    b(p,u) = (p,\mathcal P u)
 \end{equation}
 where $(\bullet, \bullet): P \times P \to \mathbb R$ is the inner product in $P$.
 
 By introducing the discrete spaces $U_h \subset U$ and $P_h \subset P$, the constraint of Eq. \eqref{eq:constraint} is approximated as: find $u_h \in U_h$ such that
 \begin{equation}\label{eq:discrete_constraint}
-    b(u_h,p_h) = g(p_h), \quad  \forall p_h \in P_h
+    b(p_h,u_h) = g(p_h), \quad  \forall p_h \in P_h
 \end{equation}
 and $\mathcal P$'s orthogonal projection operator regarding to $P_h$, namely $\mathcal P_h: U_h \to P_h$, is defined by 
 \begin{equation}\label{eq:Ph}
-(\mathcal P u_h - \mathcal P_h u_h,p_h) = 0
+(p_h,\mathcal P u_h - \mathcal P_h u_h) = 0
 \Rightarrow
-(\mathcal P u_h, p_h) = (\mathcal P_h u_h, p_h),
+(p_h, \mathcal P u_h) = (p_h, \mathcal P_h u_h),
 \quad \forall p_h \in P_h
 \end{equation}
 
 To obtain the satisfaction solution of saddle-point problems with constraint of Eq. \eqref{eq:discrete_constraint},
 the well-known LBB condition is required, i.e., there exists a positive constant $\beta > 0$, namely LBB coefficient, such that
 \begin{equation}
-    \inf_{p_h \in P_h} \sup_{u_h \in U_h} \frac{|b(u_h,p_h)|}{\| u \|_U \| p \|_P} \geq \beta
+    \inf_{p_h \in P_h} \sup_{u_h \in U_h} \frac{|b(p_h,u_h)|}{\| p \|_P\| u \|_U} \geq \beta
 \end{equation}
 where $\| \bullet \|_U$ and $\| \bullet \|_P$ are the norms in spaces $U$ and $P$, respectively.
 To further estimate the LBB coefficient $\beta$ by the degree of freedom of $U_h$ and $P_h$, i.e. $n_u = \dim U_h$ and $n_p = \dim P_h$, we introduce the following theorem.
 
 \begin{thm}\label{thm:estimator}
-Suppose that $U_{n_u} \subset U$ is a complete polynomial space with $\dim U_{n_u} = n_u$. The LBB coefficient $\beta$ can be estimated by:
+Suppose that $\mathcal P: U\rightarrow P$ is the linear operator representing the bilinear form $b$ in LBB condition and $\mathcal P_h: U_h \rightarrow P_h$ is the corresponding orthogonal projection operator regarding to $P_h$,
+$U_{n_u} \subset U$ is a complete polynomial space with $\dim U_{n_u} = n_u$. The LBB coefficient $\beta$ can be estimated by:
 \begin{equation}
 \beta \leq \inf_{U' \subset U_{n_u}\setminus \ker \mathcal P_h \mathcal I_h} \sup_{u \in U'} \frac{\| \mathcal P u\|_P}{\| u \|_U} + O(h) 
 \end{equation}
@@ -46,8 +47,8 @@ where $\mathcal I_h: U \to U_h$ is the interpolation operator with the character
 Firstly, with the definition of $\mathcal P$ and $\mathcal P_h$ in Eqs. \eqref{eq:P} and \eqref{eq:Ph} respectively, the LBB condition can be rewritten as:
 \begin{equation}\label{eq:proof_1}
     \begin{aligned}
-        \beta &\leq \inf_{p_h \in P_h} \sup_{u_h \in U_h} \frac{|(\mathcal P u_h,p_h)|}{\| u_h \|_U \| p_h \|_P} = \inf_{p_h \in P_h} \sup_{u_h \in U_h} \frac{|(\mathcal P_h u_h,p_h)|}{\| u_h \|_U \| p_h \|_P} \\
-        &\leq \inf_{p_h \in \mathrm{Im} \mathcal P_h} \sup_{u \in U_h} \frac{|(\mathcal P_h u_h,p_h)|}{\| u_h \|_U \| p_h \|_P}
+        \beta &\leq \inf_{p_h \in P_h} \sup_{u_h \in U_h} \frac{|(p_h,\mathcal P u_h)|}{\| p_h \|_P\| u_h \|_U} = \inf_{p_h \in P_h} \sup_{u_h \in U_h} \frac{|(p_h,\mathcal P_h u_h)|}{\| p_h \|_P\| u_h \|_U} \\
+        &\leq \inf_{p_h \in \mathrm{Im} \mathcal P_h} \sup_{u \in U_h} \frac{|(p_h,\mathcal P_h u_h)|}{\| p_h \|_P\| u_h \|_U}
     \end{aligned}
 \end{equation}
 where $\mathrm{Im} \mathcal P_h$ is the image space of operator $\mathcal P_h$, i.e. $\mathrm{Im} \mathcal P_h := \{p_h \in P_h |\; \exists u_h \in U_h,\; \mathcal P_h u_h = p_h \}$, $\mathrm{Im} \mathcal P_h \subset P_h$.
