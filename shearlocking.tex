@@ -3,11 +3,11 @@ The previous section has been mentioned that the shear locking is consisted of t
 The corresponding LBB conditions are listed as follows:
 \begin{itemize}
     \item Shear force locking LBB condition:
-        \begin{equation}
+        \begin{equation}\label{eq:LBB_q}
         \inf_{w_h\in W_h} \sup_{\boldsymbol q_h \in Q_h} \frac{\vert b_w(w_h,\boldsymbol q_h)\vert}{\Vert w_h\Vert_W \Vert \boldsymbol q_h \Vert_Q} \ge \beta_q
         \end{equation}
     \item Shear strain locking LBB condition:
-        \begin{equation}
+        \begin{equation}\label{eq:LBB_gamma}
         \inf_{\boldsymbol q_h \in Q_h} \sup_{\boldsymbol u_h \in W_h \times \Phi_h}
         \frac{\vert b(\boldsymbol q_h, \boldsymbol u_h) \vert}{\Vert \boldsymbol q_h \Vert_Q \Vert \boldsymbol u_h \Vert_{W\times \Phi}} \ge \beta_\gamma
         \end{equation}
@@ -27,43 +27,59 @@ The detailed path for the complete-polynormial-based estimate method is lised in
 Consequently, the optimal ratio of degrees of freedoms (DOFs) between variables can be revealed based on these two estimators.
 
 \subsection{Estimator for $\beta_q$}
+The coefficient $\beta$ controls the behavior of shear force locking in Eq. \eqref{eq:force_locking_weak}, the detailed enforcement is listed as follows:
 \begin{equation}
     \begin{aligned}
-        &b_w(\delta w_h, \boldsymbol q_h) - f_w(\delta w_h) \\
+        &b_w(\delta w_h, \boldsymbol q_h) - f_w(\delta w_h) = (\delta w_h, \mathcal W \boldsymbol q_h) - f_w(\delta w_h) \\
         =& \int_{\Gamma_q} \delta w_h(\boldsymbol q_h \cdot \boldsymbol n - \bar q_n) d\Gamma - \int_\Omega \delta w_h (\nabla \cdot \boldsymbol q_h + \bar p) d\Omega \\
         =& 0
     \end{aligned}
 \end{equation}
+where, the constraints includes two parts, one is the equilibrium equation between shear force resultant and  transverse load in $\Omega$, the other is the natrual shear force boundary condition on $\Gamma_q$.
+In accordance with the general form of completed-polynormial-based estimator, as shown in \ref{sec:estimator}, 
+the operator $\mathcal W: Q\rightarrow W$ is a specific instance of $\mathcal P$ in Theorem.\ref{thm:estimator}, and is defined as:
 \begin{equation}
-\mathcal P :=
 \mathcal W = \left \{
     \begin{aligned}
         &\mathcal W^\Omega = \nabla \cdot & & \textrm{in}\; \Omega \\
-        &\mathcal W^{\Gamma_q}\mathcal T^{\Gamma_q}, \; \mathcal W^{\Gamma_q} = \cdot \boldsymbol n & & \textrm{on}\; \Gamma_q
+        &\mathcal W^{\Gamma_q}\mathcal T^{\Gamma_q}, \; \mathcal W^{\Gamma_q} = \boldsymbol n \cdot & & \textrm{on}\; \Gamma_q
     \end{aligned}
     \right .
 \end{equation}
-where $\mathcal T^{\Gamma_q}: Q_{n_q}(\Omega) \rightarrow Q_{n_q^{\Gamma}}(\Gamma_q)$
-
-\begin{equation}
-b_w(w_h,\boldsymbol q_h) = (w_h, \mathcal W_h \boldsymbol q_h) = f_w(w_h)
-\end{equation}
-\begin{equation}
-\beta_q \le \inf_{Q'\subset Q_{n_q} \setminus \mathcal W_h \mathcal I_h^q}
+where, based on the trace theorem \cite{}, $\mathcal T^{\Gamma_q}: Q(\Omega) \rightarrow Q(\Gamma_q)$ is a trace operator mapping the shear force $\boldsymbol q$ from domain $\Omega$ to the boundary $\Gamma_q$, while the parametric variable of $\boldsymbol q$ on boundary can be represented using $s$, i.e. $\boldsymbol q(s) \in Q(\Gamma_q)$. 
+According to Theorem.\ref{thm:estimator}, the completed-polynomial-based estimator of $\beta_q$ has the following form:
+\begin{equation}\label{eq:beta_q}
+\beta_q \le \inf_{Q'\subset Q_{n_q} \setminus \ker \mathcal W_h \mathcal I_h^q}
 \sup_{\boldsymbol q \in Q'}
 \frac{\Vert \mathcal W\boldsymbol q \Vert_W}{\Vert \boldsymbol q \Vert_Q} + O(h)
 \end{equation}
+in which $\mathcal I_h^q:Q\rightarrow Q_h$ is the interpolation operator for shear force resultant.
+$\mathcal W_h:Q_h\rightarrow W_h$ is the orthogonal operator of $\mathcal W$, i.e. $(\delta w_h, \mathcal W \boldsymbol q_h - \mathcal W_h \boldsymbol q_h)=0$.
+$Q_{n_q}\subset Q(\Omega)$ is the completed polynomial space with the identical dimensions with $Q_h$, i.e. $\dim Q_{n_q} = \dim Q_h = 2n_q$.
+
+From Eq. \eqref{eq:beta_q}, the LBB condition of Eq. \eqref{eq:LBB_q} can be maintained while the first term on right-hand side of Eq. \eqref{eq:beta_q} is non-zero, which should be necessarily required that:
 \begin{equation}
-    \ker \mathcal W = \ker \mathcal W^\Omega \cap \ker \mathcal W^{\Gamma_q}
+    \dim \left(Q_{n_q} \setminus \ker \mathcal W_h \mathcal I_h^q\right) \le \dim \left(Q_{n_q} \setminus \ker \mathcal W\right)
 \end{equation}
+% where $\mathcal W\vert_{Q_{q_n}}$ is the restriction of $\mathcal W$ to space $Q_{q_n}$.
+For mixed--formulation, the dimension of $Q_{n_q}\setminus \ker \mathcal W_h \mathcal I_h^q$ is evaluated by the dimension of $\mathrm{Im} \mathcal W_h$ and $\dim (\mathrm{Im} \mathcal W_h) = n_w$, yields:
 \begin{equation}
-    \begin{aligned}
-        n_w &\le \left(\dim Q_{n_q}(\Omega) - \dim \ker \mathcal W^\Omega\right) + \left(\dim Q_{n_q^\Gamma}(\Gamma_q)- \dim \ker \mathcal W^{\Gamma_q}\right) \\
-        &\le \langle \lfloor [n_q] \rfloor -1 \rangle + n_q^\Gamma
-    \end{aligned}
+    n_w = \dim \left(Q_{n_q} \setminus \ker \mathcal W_h \mathcal I_h^q\right)
 \end{equation}
+
+In contrast,
 \begin{equation}
-    \ker \mathcal W^\Omega = \left \{
+    % \begin{split}
+    %     \dim(Q_{n_q}\setminus \ker \mathcal W\vert_{Q_{n_q}}) &\le \dim\left(Q_{n_q}\setminus \ker \mathcal W^\Omega\vert_{Q_{n_q}}\right) \\
+    %     &+ \dim \left(Q_{n_q^\Gamma}\setminus \ker \mathcal W^\Gamma_q \vert_{Q_{n_q^\Gamma}}\right)
+    % \end{split}
+    \dim\left(Q_{n_q}\setminus \ker \mathcal W\right) \le \dim\left(Q_{n_q}\setminus \ker \mathcal W^\Omega\right)
+    + \dim \left(Q_{n_q^\Gamma}\setminus \ker \mathcal W^{\Gamma_q}\right)
+\end{equation}
+where $Q_{n_q^\Gamma}\subset Q(\Gamma_q)$ with dimension $\dim Q_{n_q^\Gamma} = 2n_q^\Gamma$
+\begin{align}
+    Q_{n_q} &= \left \{
+        \underbrace{
         \begin{pmatrix}
             1 \\ 0
         \end{pmatrix},
@@ -78,21 +94,32 @@ b_w(w_h,\boldsymbol q_h) = (w_h, \mathcal W_h \boldsymbol q_h) = f_w(w_h)
         \end{pmatrix},
         \begin{pmatrix}
             x \\ -y
-        \end{pmatrix}, \dots
-    \right \}
-\end{equation}
-\begin{equation}
-    \ker \mathcal W^{\Gamma_q} = \left \{
+        \end{pmatrix},
+        \dots}_{\ker \mathcal W^\Omega},
+        \begin{pmatrix}
+            x \\ y
+        \end{pmatrix},
+        \dots
+    \right \} \\
+    \mathcal Q_{n_q^\Gamma} &= \left \{
+        \underbrace{
         \begin{pmatrix}
             n_2 \\ -n_1
         \end{pmatrix},
         \begin{pmatrix}
             n_2 s \\ -n_1 s
         \end{pmatrix},
+        \dots}_{\ker \mathcal W^{\Gamma_q}},
         \begin{pmatrix}
-            n_2 s^2 \\ -n_1 s^2
+            n_2 \\ n_1
+        \end{pmatrix},
+        \begin{pmatrix}
+            n_2 s \\ n_1 s
         \end{pmatrix}, \dots
     \right \}
+\end{align}
+\begin{equation}
+    n_w \le \langle \lfloor [n_q] \rfloor -1 \rangle + n_q^\Gamma
 \end{equation}
 
 $\dim Q_{n_q} = 2n_q$
