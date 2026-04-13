@@ -69,16 +69,20 @@ For mixed--formulation, the dimension of $Q_{n_q}\setminus \ker \mathcal W_h \ma
 
 In contrast,
 \begin{equation}
-    % \begin{split}
-    %     \dim(Q_{n_q}\setminus \ker \mathcal W\vert_{Q_{n_q}}) &\le \dim\left(Q_{n_q}\setminus \ker \mathcal W^\Omega\vert_{Q_{n_q}}\right) \\
-    %     &+ \dim \left(Q_{n_q^\Gamma}\setminus \ker \mathcal W^\Gamma_q \vert_{Q_{n_q^\Gamma}}\right)
-    % \end{split}
-    \dim\left(Q_{n_q}\setminus \ker \mathcal W\right) \le \dim\left(Q_{n_q}\setminus \ker \mathcal W^\Omega\right)
-    + \dim \left(Q_{n_q^\Gamma}\setminus \ker \mathcal W^{\Gamma_q}\right)
+    \ker \mathcal W = \ker \mathcal W^\Omega \cap \ker \mathcal W^{\Gamma_q} \mathcal T^{\Gamma_q}
 \end{equation}
-where $Q_{n_q^\Gamma}\subset Q(\Gamma_q)$ with dimension $\dim Q_{n_q^\Gamma} = 2n_q^\Gamma$
-\begin{align}
-    Q_{n_q} &= \left \{
+De Morgan's laws:
+\begin{equation}
+    \begin{aligned}
+        Q_{n_q}\setminus \ker \mathcal W &=
+        Q_{n_q}\setminus \left(\ker\mathcal W^\Omega\cap\ker\mathcal W^{\Gamma_q}\mathcal T^{\Gamma_q}\right) \\
+        &=\left(Q_{n_q} \setminus \ker \mathcal W^\Omega\right)
+        \cup 
+        \left(Q_{n_q}\setminus \ker \mathcal W^{\Gamma_q}\mathcal T^{\Gamma_q}\right)
+    \end{aligned}
+\end{equation}
+\begin{equation}
+    Q_{n_q} = \left \{
         \underbrace{
         \begin{pmatrix}
             1 \\ 0
@@ -95,13 +99,40 @@ where $Q_{n_q^\Gamma}\subset Q(\Gamma_q)$ with dimension $\dim Q_{n_q^\Gamma} = 
         \begin{pmatrix}
             x \\ -y
         \end{pmatrix},
-        \dots}_{\ker \mathcal W^\Omega},
+        \dots}_{\ker \mathcal W^\Omega}, 
+        \underbrace{
         \begin{pmatrix}
             x \\ y
         \end{pmatrix},
-        \dots
-    \right \} \\
-    \mathcal Q_{n_q^\Gamma} &= \left \{
+        \dots}_{Q_{n_q}\setminus \ker \mathcal W^\Omega}
+    \right \}
+\end{equation}
+Rank--Nullity theorem:
+\begin{equation}
+    \dim Q_{n_q} = \dim\left(\mathrm{Im}\mathcal W^{\Gamma_q}\mathcal T^{\Gamma_q}\right) + \dim\left(\ker\mathcal W^{\Gamma_q}\mathcal T^{\Gamma_q}\right)
+\end{equation}
+\begin{equation}
+    \dim\left(Q_{n_q}\setminus \ker \mathcal W^{\Gamma_q}\mathcal T^{\Gamma_q}\right) = \dim\left(\mathrm{Im} \mathcal W^{\Gamma_q}\mathcal T^{\Gamma_q}\right)
+\end{equation}
+\begin{equation}
+    \dim Q_{n_q^\Gamma} = \dim\left(\mathrm{Im}\mathcal T^{\Gamma_q}\right) = \dim\left(\mathrm{Im}\mathcal W^{\Gamma_q}\right) + \dim \left(\ker \mathcal W^{\Gamma_q}\right)
+\end{equation}
+
+\begin{equation}
+    \dim\left(Q_{n_q}\setminus \ker W^{\Gamma_q}\mathcal T^{\Gamma_q}\right) = \dim\left(Q_{n_q^\Gamma} \setminus \ker \mathcal W^{\Gamma_q}\right) = n_q^\Gamma
+\end{equation}
+where $\dim Q_{n_q^\Gamma} = \dim \mathrm{Im} \mathcal I_h^q(Q_h) = 2n_q^\Gamma$
+\begin{equation}
+    % \begin{split}
+    %     \dim(Q_{n_q}\setminus \ker \mathcal W\vert_{Q_{n_q}}) &\le \dim\left(Q_{n_q}\setminus \ker \mathcal W^\Omega\vert_{Q_{n_q}}\right) \\
+    %     &+ \dim \left(Q_{n_q^\Gamma}\setminus \ker \mathcal W^\Gamma_q \vert_{Q_{n_q^\Gamma}}\right)
+    % \end{split}
+    \dim\left(Q_{n_q}\setminus \ker \mathcal W\right) \le \dim\left(Q_{n_q}\setminus \ker \mathcal W^\Omega\right)
+    + \dim \left(Q_{n_q^\Gamma}\setminus \ker \mathcal W^{\Gamma_q}\right)
+\end{equation}
+where $Q_{n_q^\Gamma}\subset Q(\Gamma_q)$ with dimension $\dim Q_{n_q^\Gamma} = 2n_q^\Gamma$
+\begin{equation}
+   \mathcal Q_{n_q^\Gamma} = \left \{
         \underbrace{
         \begin{pmatrix}
             n_2 \\ -n_1
@@ -110,14 +141,15 @@ where $Q_{n_q^\Gamma}\subset Q(\Gamma_q)$ with dimension $\dim Q_{n_q^\Gamma} = 
             n_2 s \\ -n_1 s
         \end{pmatrix},
         \dots}_{\ker \mathcal W^{\Gamma_q}},
+        \underbrace{
         \begin{pmatrix}
             n_2 \\ n_1
         \end{pmatrix},
         \begin{pmatrix}
             n_2 s \\ n_1 s
-        \end{pmatrix}, \dots
+        \end{pmatrix}, \dots}_{Q_{n_q}^\Gamma\setminus \ker \mathcal W^{\Gamma_q}}
     \right \}
-\end{align}
+\end{equation}
 \begin{equation}
     n_w \le \langle \lfloor [n_q] \rfloor -1 \rangle + n_q^\Gamma
 \end{equation}

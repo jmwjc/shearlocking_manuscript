@@ -52,6 +52,7 @@ Firstly, with the definition of $\mathcal P$ and $\mathcal P_h$ in Eqs. \eqref{e
         &\leq \inf_{p_h \in \mathrm{Im} \mathcal P_h} \sup_{u \in U_h} \frac{|(p_h,\mathcal P_h u_h)|}{\| p_h \|_P\| u_h \|_U}
     \end{aligned}
 \end{equation}
+FIXME: the definition of image space can be canceled.
 where $\mathrm{Im} \mathcal P_h$ is the image space of operator $\mathcal P_h$, i.e. $\mathrm{Im} \mathcal P_h := \{p_h \in P_h |\; \exists u_h \in U_h,\; \mathcal P_h u_h = p_h \}$, $\mathrm{Im} \mathcal P_h \subset P_h$.
 Since both $p_h$ and $\mathcal P_h u_h$ belong to $\mathrm{Im} \mathcal P_h$, using Cauchy-Schwarz inequality, we can further obtain that:
 \begin{equation}\label{eq:proof_2}
@@ -96,6 +97,7 @@ in which $C$ is a positive constant independent of $h$, $k$ is the convergence o
 \end{equation}
 \end{pf}
 
+FIXME:use the remark env
 It should be noted that Theorem \ref{thm:estimator} inherently embeds the numbers of DOFs of approximation spaces $U_h$ and $P_h$,
 while $n_u = \dim U_h$ and $n_p =\dim \mathrm{Im} \mathcal P_h = \dim (U_h \setminus \ker \mathcal P_h \mathcal I_h)$,
 thus it is easy to justify the LBB condition by just counting the DOFs of approximation spaces.
