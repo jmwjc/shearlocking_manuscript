@@ -1,4 +1,4 @@
-\section{Preliminaries for functional analysis}
+\section{Preliminaries for functional analysis}\label{sec:functional}
 
 In the interest of conciseness, 
 kernel space
@@ -12,13 +12,47 @@ image space
 \end{equation}
 It is clear that $\ker \mathcal P \subset U$ and $\mathrm{Im} \mathcal P \in P$.
 
-FIXME:Trace's theorem
-FIXME:use lemma env
+FIXME:
+Trace's theorem
+De Morgan's theorem
+Grassmann's theorem
+Rank-nullity theorem
+
 \begin{lma}
 Suppose that $\mathcal T: U\rightarrow U\vert_\Gamma$ is the trace operator of $U$, $U\vert_\Gamma$ is $U$'s trace space on the boundary $\Gamma$. 
-
+Let $\mathcal L$ is an operator acting on $U\vert_\Gamma$, then we have:
+\begin{equation}\label{eq:lma}
+    \dim (U\setminus \ker\mathcal L\mathcal T) = \dim (U\vert_\Gamma \setminus \ker \mathcal L)
+\end{equation}
+\end{lma}
+\begin{pf}
+In accordance with rank--nullity theorem, we have the following relationship:
 \begin{equation}
-    \dim (U\setminus \ker\mathcal L\mathcal T) = \dim (U_\Gamma \setminus \ker \mathcal L)
+    \dim U = \dim(\mathrm{Im} \mathcal L \mathcal T) + \dim(\ker \mathcal L \mathcal T)
+\end{equation}
+or
+\begin{equation}\label{eq:dimu}
+    \dim (U\setminus \ker \mathcal L\mathcal T) = 
+    \dim U - \dim(\ker \mathcal L\mathcal T) = \dim(\mathrm{Im} \mathcal L \mathcal T)
+\end{equation}
+in which, according to the definition of the image space $\mathrm{Im} \mathcal L \mathcal T$, it is clear that:
+\begin{equation}\label{eq:ImLT}
+    \mathrm{Im}\mathcal L \mathcal T = \{
+        \mathcal L \mathcal T u \; \vert \; u \in U
+    \} = \{
+        \mathcal L (\mathcal T u) \; \vert \; \mathcal T u \in U\vert_\Gamma
+    \} = \mathrm{Im}\mathcal L
 \end{equation}
 
-\end{lma}
+Subsequently, the dimension of image space for operator $\mathcal L$, i.e. $\dim(\mathrm{Im} \mathcal L)$, can be evaluated by introducing rank--nullity theorem again as follows:
+\begin{equation}
+    \dim U\vert_\Gamma = \dim(\mathrm{Im} \mathcal L) + \dim(\ker \mathcal L)
+\end{equation}
+or
+\begin{equation}\label{eq:ImL}
+    % \dim(\mathrm{Im}\mathcal L\mathcal T) = 
+    \dim(\mathrm{Im}\mathcal L) = \dim U\vert_\Gamma - \dim(\ker \mathcal L) = \dim(U\vert_\Gamma\setminus\ker\mathcal L)
+\end{equation}
+
+With the combination of Eqs. \eqref{eq:dimu}, \eqref{eq:ImLT} and \eqref{eq:ImL}, the relationship of Eq. \eqref{eq:lma} can be proofed
+\end{pf}

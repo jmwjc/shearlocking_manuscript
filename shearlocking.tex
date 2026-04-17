@@ -36,51 +36,70 @@ The coefficient $\beta$ controls the behavior of shear force locking in Eq. \eqr
     \end{aligned}
 \end{equation}
 where, the constraints includes two parts, one is the equilibrium equation between shear force resultant and  transverse load in $\Omega$, the other is the natrual shear force boundary condition on $\Gamma_q$.
-In accordance with the general form of completed-polynormial-based estimator, as shown in \ref{sec:estimator}, 
+In accordance with the general form of completed-polynormial-based estimator mentioned in \ref{sec:estimator}, 
 the operator $\mathcal W: Q\rightarrow W$ is a specific instance of $\mathcal P$ in Theorem.\ref{thm:estimator}, and is defined as:
-\begin{equation}
+\begin{equation}\label{eq:operator_W}
 \mathcal W = \left \{
     \begin{aligned}
-        &\mathcal W^\Omega = \nabla \cdot & & \textrm{in}\; \Omega \\
+        &\mathcal W^\Omega = -\nabla \cdot & & \textrm{in}\; \Omega \\
         &\mathcal W^{\Gamma_q}\mathcal T^{\Gamma_q}, \; \mathcal W^{\Gamma_q} = \boldsymbol n \cdot & & \textrm{on}\; \Gamma_q
     \end{aligned}
     \right .
 \end{equation}
-where, based on the trace theorem \cite{}, $\mathcal T^{\Gamma_q}: Q(\Omega) \rightarrow Q(\Gamma_q)$ is a trace operator mapping the shear force $\boldsymbol q$ from domain $\Omega$ to the boundary $\Gamma_q$, while the parametric variable of $\boldsymbol q$ on boundary can be represented using $s$, i.e. $\boldsymbol q(s) \in Q(\Gamma_q)$. 
+where, based on the trace theorem \cite{}, $\mathcal T^{\Gamma_q}: Q \rightarrow Q\vert_{\Gamma_q}$ is a trace operator mapping the shear force $\boldsymbol q$ from domain $\Omega$ to the boundary $\Gamma_q$, while the parametric variable of $\boldsymbol q$ on boundary can be represented using $s$, i.e. $\boldsymbol q(s) \in Q\vert_{\Gamma_q}$. 
 According to Theorem.\ref{thm:estimator}, the completed-polynomial-based estimator of $\beta_q$ has the following form:
 \begin{equation}\label{eq:beta_q}
 \beta_q \le \inf_{Q'\subset Q_{n_q} \setminus \ker \mathcal W_h \mathcal I_h^q}
 \sup_{\boldsymbol q \in Q'}
 \frac{\Vert \mathcal W\boldsymbol q \Vert_W}{\Vert \boldsymbol q \Vert_Q} + O(h)
 \end{equation}
-in which $\mathcal I_h^q:Q\rightarrow Q_h$ is the interpolation operator for shear force resultant.
+in which $\mathcal I_h^q:Q_{n_q}\rightarrow Q_h$ is the interpolation operator for shear force resultant.
 $\mathcal W_h:Q_h\rightarrow W_h$ is the orthogonal operator of $\mathcal W$, i.e. $(\delta w_h, \mathcal W \boldsymbol q_h - \mathcal W_h \boldsymbol q_h)=0$.
-$Q_{n_q}\subset Q(\Omega)$ is the completed polynomial space with the identical dimensions with $Q_h$, i.e. $\dim Q_{n_q} = \dim Q_h = 2n_q$.
+$Q_{n_q}\subset Q$ is the polynomial space with the identical dimensions with $Q_h$, i.e. $\dim Q_{n_q} = \dim Q_h = 2n_q$.
 
 From Eq. \eqref{eq:beta_q}, the LBB condition of Eq. \eqref{eq:LBB_q} can be maintained while the first term on right-hand side of Eq. \eqref{eq:beta_q} is non-zero, which should be necessarily required that:
-\begin{equation}
+\begin{equation}\label{eq:dim_relation_1}
     \dim \left(Q_{n_q} \setminus \ker \mathcal W_h \mathcal I_h^q\right) \le \dim \left(Q_{n_q} \setminus \ker \mathcal W\right)
 \end{equation}
-% where $\mathcal W\vert_{Q_{q_n}}$ is the restriction of $\mathcal W$ to space $Q_{q_n}$.
-For mixed--formulation, the dimension of $Q_{n_q}\setminus \ker \mathcal W_h \mathcal I_h^q$ is evaluated by the dimension of $\mathrm{Im} \mathcal W_h$ and $\dim (\mathrm{Im} \mathcal W_h) = n_w$, yields:
-\begin{equation}
-    n_w = \dim \left(Q_{n_q} \setminus \ker \mathcal W_h \mathcal I_h^q\right)
+where, obviously, leading the definitions of $\mathcal I_h^q$ and $Q_{n_q}$, and the rank--nullity theorem, the left-hand side of Eq. \eqref{eq:dim_relation_1} can be rewritten as:
+\begin{equation}\label{eq:dim_relation_2}
+    \begin{split}
+        \dim \left(Q_{n_q} \setminus \ker \mathcal W_h \mathcal I_h^q\right) &= \dim \left(Q_h\setminus \ker \mathcal W_h\right) \\
+        &= \dim Q_h - \dim \left(\ker \mathcal W_h\right) \\
+        &= \dim(\mathrm{Im} \mathcal W_h) \\
+        &= \dim W_h = n_w
+    \end{split}
 \end{equation}
 
-In contrast,
-\begin{equation}
+In contrast, to evaluate the right--hand side of Eq. \eqref{eq:dim_relation_1}, we first introduce the definition of operator $\mathcal W$ in \eqref{eq:operator_W}, $\ker \mathcal W$ can be represented as:
+\begin{equation}\label{eq:space_W}
     \ker \mathcal W = \ker \mathcal W^\Omega \cap \ker \mathcal W^{\Gamma_q} \mathcal T^{\Gamma_q}
 \end{equation}
-De Morgan's laws:
-\begin{equation}
-    \begin{aligned}
-        Q_{n_q}\setminus \ker \mathcal W &=
-        Q_{n_q}\setminus \left(\ker\mathcal W^\Omega\cap\ker\mathcal W^{\Gamma_q}\mathcal T^{\Gamma_q}\right) \\
-        &=\left(Q_{n_q} \setminus \ker \mathcal W^\Omega\right)
+According to above equation, the space $Q_{n_q}\setminus \ker \mathcal W$ can be expressed by two terms,
+one is regarding the kernel space of $\mathcal W^\Omega$, the other is regarding the kernel space of $\mathcal W^{\Gamma_q}\mathcal T^{\Gamma_q}$, yields:
+\begin{equation}\label{eq:dim_relation_3}
+    \begin{split}
+        \dim(Q_{n_q}\setminus\ker\mathcal W)
+        &=\dim \left(Q_{n_q}\setminus (\ker\mathcal W^\Omega\cap\ker\mathcal W^{\Gamma_q}\mathcal T^{\Gamma_q})\right) \\
+        &=\dim\left(Q_{n_q} \setminus \ker \mathcal W^\Omega\right)
         \cup 
-        \left(Q_{n_q}\setminus \ker \mathcal W^{\Gamma_q}\mathcal T^{\Gamma_q}\right)
-    \end{aligned}
+        \dim\left(Q_{n_q}\setminus \ker \mathcal W^{\Gamma_q}\mathcal T^{\Gamma_q}\right) \\
+        &= \dim\left(Q_{n_q}\setminus\ker \mathcal W^\Omega\right)
+        +\dim\left(Q_{n_q}\setminus \ker \mathcal W^{\Gamma_q}\mathcal T^{\Gamma_q}\right) \\
+        &-\dim\left((Q_{n_q}\setminus\ker \mathcal W^\Omega)\cap (Q_{n_q}\setminus \ker \mathcal W^{\Gamma_q}\mathcal T^{\Gamma_q})\right)
+    \end{split}
 \end{equation}
+where the second and third equations of Eq. \eqref{eq:dim_relation_3} is derived based on De Morgan's theorem\cite{} and Grassmann's theorem\cite{} respectively.
+For clarity, these two theorems are illustrated in \ref{sec:functional}.
+
+For the first term regarding the kernel space of $\mathcal W^\Omega$,
+in accordance with rank--nullity theorem\cite{strang2006}, the dimension of this space is equal to the that of the image space of $\mathcal W^\Omega$ as:
+\begin{equation}
+    \dim \left(Q_{n_q}\setminus \ker \mathcal W^\Omega\right) = \dim Q_{n_q} - \dim\left(\ker \mathcal W^\Omega\right) = \dim \left(\mathrm{Im} \mathcal W^\Omega\right)
+\end{equation}
+Because of the $Q_{n_q}$ is the second order polynomial tensor space with dimension of $2n_q$
+and the $\mathcal W^\Omega$ is the divergence operator acting on $Q_{n_q}$, the polynomial in $\mathrm{Im} \mathcal W^\Omega$ is one order lower than polynomial order of $Q_{n_q}$.
+The following equation presents the detailed monomial basis of $Q_{n_q}$, and the kernel space of operator $\mathcal W^\Omega$:
 \begin{equation}
     Q_{n_q} = \left \{
         \underbrace{
@@ -107,31 +126,33 @@ De Morgan's laws:
         \dots}_{Q_{n_q}\setminus \ker \mathcal W^\Omega}
     \right \}
 \end{equation}
-Rank--Nullity theorem:
+
+To simplify the expression, we define two operators to implement the transformation between the order of a complete polynomial space, namely $n_o$ and its monomial basis number, namely $n_m$:
 \begin{equation}
-    \dim Q_{n_q} = \dim\left(\mathrm{Im}\mathcal W^{\Gamma_q}\mathcal T^{\Gamma_q}\right) + \dim\left(\ker\mathcal W^{\Gamma_q}\mathcal T^{\Gamma_q}\right)
+n_o = [n_p] = \frac{\sqrt{1+8n_p}-3}{2}
+,\quad
+n_p = \langle n_o \rangle = \frac{(n_o+1)(n_o+2)}{2}
 \end{equation}
-\begin{equation}
-    \dim\left(Q_{n_q}\setminus \ker \mathcal W^{\Gamma_q}\mathcal T^{\Gamma_q}\right) = \dim\left(\mathrm{Im} \mathcal W^{\Gamma_q}\mathcal T^{\Gamma_q}\right)
-\end{equation}
-\begin{equation}
-    \dim Q_{n_q^\Gamma} = \dim\left(\mathrm{Im}\mathcal T^{\Gamma_q}\right) = \dim\left(\mathrm{Im}\mathcal W^{\Gamma_q}\right) + \dim \left(\ker \mathcal W^{\Gamma_q}\right)
+where $\langle [n] \rangle = n$.
+Therefore, the dimension of $\mathrm{Im} \mathcal W^\Omega$ can be estimated by:
+\begin{equation}\label{eq:dim_relation_3_1}
+    \langle \lfloor [n_q] \rfloor - 1\rangle \le \dim(\mathrm{Im} \mathcal W^\Omega) \le \langle \lceil [n_q] \rceil -1 \rangle
 \end{equation}
 
-\begin{equation}
-    \dim\left(Q_{n_q}\setminus \ker W^{\Gamma_q}\mathcal T^{\Gamma_q}\right) = \dim\left(Q_{n_q^\Gamma} \setminus \ker \mathcal W^{\Gamma_q}\right) = n_q^\Gamma
+
+For the second term regarding the kernel space of $\mathcal W^{\Gamma_q} \mathcal T^{\Gamma_q}$, 
+\begin{equation}\label{eq:dim_relation_3_2_1}
+    \begin{aligned}
+        \dim\left(Q_{n_q}\setminus\ker \mathcal W^{\Gamma_q}\mathcal T^{\Gamma_q}\right)&=
+        \dim\left(Q_{n_q^{\Gamma}}\setminus\ker \mathcal W^{\Gamma_q}\right) \\
+        &= \dim Q_{n_q^{\Gamma}} - \dim\left(\ker \mathcal W^{\Gamma_q}\right) \\
+        &= \dim(\mathrm{Im}\mathcal W^{\Gamma_q})
+    \end{aligned}
 \end{equation}
-where $\dim Q_{n_q^\Gamma} = \dim \mathrm{Im} \mathcal I_h^q(Q_h) = 2n_q^\Gamma$
-\begin{equation}
-    % \begin{split}
-    %     \dim(Q_{n_q}\setminus \ker \mathcal W\vert_{Q_{n_q}}) &\le \dim\left(Q_{n_q}\setminus \ker \mathcal W^\Omega\vert_{Q_{n_q}}\right) \\
-    %     &+ \dim \left(Q_{n_q^\Gamma}\setminus \ker \mathcal W^\Gamma_q \vert_{Q_{n_q^\Gamma}}\right)
-    % \end{split}
-    \dim\left(Q_{n_q}\setminus \ker \mathcal W\right) \le \dim\left(Q_{n_q}\setminus \ker \mathcal W^\Omega\right)
-    + \dim \left(Q_{n_q^\Gamma}\setminus \ker \mathcal W^{\Gamma_q}\right)
-\end{equation}
-where $Q_{n_q^\Gamma}\subset Q(\Gamma_q)$ with dimension $\dim Q_{n_q^\Gamma} = 2n_q^\Gamma$
-\begin{equation}
+where $Q_{n_q^\Gamma}\subset Q\vert_{\Gamma_q}$ is the polynomial space with the identical dimension of trace space $\mathcal T^{\Gamma_q}(Q_h)$,
+i.e. $\dim Q_{n_q^\Gamma} = \dim \mathcal T^{\Gamma_q}(Q_h) = 2n_q^\Gamma$.
+For instance, the detailed monomial basis of $Q_{n_q^\Gamma}$ is listed as follows:
+\begin{equation}\label{eq:Q_n_q_gamma}
    \mathcal Q_{n_q^\Gamma} = \left \{
         \underbrace{
         \begin{pmatrix}
@@ -140,6 +161,9 @@ where $Q_{n_q^\Gamma}\subset Q(\Gamma_q)$ with dimension $\dim Q_{n_q^\Gamma} = 
         \begin{pmatrix}
             n_2 s \\ -n_1 s
         \end{pmatrix},
+        \begin{pmatrix}
+            n_2 s^2 \\ -n_1 s^2
+        \end{pmatrix},
         \dots}_{\ker \mathcal W^{\Gamma_q}},
         \underbrace{
         \begin{pmatrix}
@@ -147,44 +171,85 @@ where $Q_{n_q^\Gamma}\subset Q(\Gamma_q)$ with dimension $\dim Q_{n_q^\Gamma} = 
         \end{pmatrix},
         \begin{pmatrix}
             n_2 s \\ n_1 s
-        \end{pmatrix}, \dots}_{Q_{n_q}^\Gamma\setminus \ker \mathcal W^{\Gamma_q}}
+        \end{pmatrix},
+        \begin{pmatrix}
+            n_2 s^2 \\ n_1 s^2
+        \end{pmatrix},
+        \dots}_{Q_{n_q}^\Gamma\setminus \ker \mathcal W^{\Gamma_q}}
     \right \}
 \end{equation}
-\begin{equation}
-    n_w \le \langle \lfloor [n_q] \rfloor -1 \rangle + n_q^\Gamma
+It is clear that, from Eq. \eqref{eq:Q_n_q_gamma}, the dimension of second term is evaluated as:
+\begin{equation}\label{eq:dim_relation_3_2}
+    \dim\left(Q_{n_q}\setminus\ker \mathcal W^{\Gamma_q}\mathcal T^{\Gamma_q}\right) = n_q^\Gamma
 \end{equation}
 
-$\dim Q_{n_q} = 2n_q$
-$\dim \ker \mathcal W^\Omega = 2n_q-\langle \lfloor [n_q] \rfloor -1 \rangle$
-$\dim Q_{n_q^\Gamma} = 2n_q^\Gamma$
-$\dim \ker \mathcal W^{\Gamma} = n_q^{\Gamma}$
+With the consideration of Eqs. \eqref{eq:dim_relation_3}, \eqref{eq:dim_relation_3_1} and \eqref{eq:dim_relation_3_2}, the right-hand side of Eq. \eqref{eq:dim_relation_1} becomes to:
+\begin{equation}\label{eq:dim_relation_4}
+\max(\langle\lfloor[n_q]\rfloor-1\rangle,n_q^\Gamma)
+\le\dim(Q_{n_q}\setminus\ker\mathcal W)\le
+\langle\lceil[n_q]\rceil-1\rangle + n_q^\Gamma
+\end{equation}
+
+It is noted that the dimension of the trace space $\mathcal T^{\Gamma_q}(Q_h)$ is generally identical to the number of DOFs on $\Gamma_q$, i.g. for finite element approximation.
+So generally speaking, $n_q^\Gamma \ll \langle\lfloor[n_q]\rfloor-1\rangle$.
+To totally ensure the LBB condition of Eq. \eqref{eq:LBB_q}, considering Eqs. \eqref{eq:dim_relation_1}, \eqref{eq:dim_relation_2} and \eqref{eq:dim_relation_4}, the $n_w$ should be always less than the low bound of $Q_{n_q}\setminus\ker\mathcal W$'s dimension, i.e.:  
+\begin{equation}
+    n_w \le \langle\lfloor[n_q]\rfloor-1\rangle
+\end{equation}
 
 
-FIXME
-\begin{equation}
-Q_{n_q} = \{\boldsymbol q = q_\alpha \boldsymbol e_\alpha \in Q\vert \boldsymbol q\cdot \boldsymbol n = \bar q_n \; \textrm{on} \; \Gamma_q,\; q_\alpha \in \mathbb P_{n_q}\}
-\end{equation}
-\begin{equation}
-n_w \le \langle \lfloor [n_q] \rfloor -1 \rangle
-\end{equation}
+
 \subsection{Estimator for $\beta_\gamma$}
 \begin{equation}
-b(\boldsymbol u_h, \boldsymbol q_h) = b_\varphi(\boldsymbol \varphi_h, \boldsymbol q_h) + b_w(w_h,\boldsymbol q_h) = (\boldsymbol q_h, \mathcal Q_h \boldsymbol u_h) = f_q(\boldsymbol q_h)
-\end{equation}
-\begin{equation}
     \begin{aligned}
-        &b(\boldsymbol q_h, \boldsymbol u_h) - f_q(\boldsymbol q_h) \\
-        =& b_\varphi(\boldsymbol \varphi_h,\boldsymbol q_h) + b_w(w_h,\boldsymbol q_h) - f_q(\boldsymbol q_h) \\
-        =& \int_\Omega \boldsymbol q \cdot (\nabla w - \boldsymbol \varphi) d\Omega - \int_{\Gamma_w} \boldsymbol q \cdot \boldsymbol n (w-\bar w)d\Gamma \\
+        &b(\delta \boldsymbol q_h, \boldsymbol u_h) - f_q(\delta \boldsymbol q_h)  = (\delta \boldsymbol q_h, \mathcal Q \boldsymbol u_h) - f_q(\delta \boldsymbol q_h)\\
+        =& \int_\Omega \delta \boldsymbol q \cdot (\nabla w - \boldsymbol \varphi) d\Omega - \int_{\Gamma_w} \delta \boldsymbol q \cdot \boldsymbol n (w-\bar w)d\Gamma \\
         =& 0
     \end{aligned}
 \end{equation}
 \begin{equation}
-\inf_{U'\subset W_{n_w}\times \Phi_{n_\varphi}\setminus \ker \mathcal Q_h} \sup_{\boldsymbol u_h \in U'}
-\frac{\Vert \mathcal Q_h \boldsymbol u_h\Vert_Q}{\Vert \boldsymbol u_h \Vert_{W\times \Phi}}
+\mathcal Q = \left\{
+    \begin{aligned}
+        &\mathcal Q^\Omega = \{\nabla, -\} & & \text{in}\;\Omega \\
+        &\mathcal Q^{\Gamma_w}\mathcal T^w, \;\mathcal Q^{\Gamma_w} = -\boldsymbol n & & \text{on}\;\Gamma_w
+    \end{aligned}
+\right.
 \end{equation}
 \begin{equation}
-\ker \mathcal Q = \left \{
+\beta_\gamma\le\inf_{U'\subset W_{n_w}\times \Phi_{n_\varphi}\setminus \ker \mathcal Q_h\mathcal I_h^u} \sup_{\boldsymbol u_h \in U'}
+\frac{\Vert \mathcal Q \boldsymbol u\Vert_Q}{\Vert \boldsymbol u \Vert_{W\times \Phi}} + O(h)
+\end{equation}
+\begin{equation}
+\dim \left(W_{n_w}\times\Phi_{n_\varphi}\setminus\ker\mathcal Q_h \mathcal I_h^u\right) \le
+\dim \left(W_{n_w}\times\Phi_{n_\varphi}\setminus\ker\mathcal Q\right)
+\end{equation}
+\begin{equation}
+    \begin{split}
+        \dim \left(W_{n_w}\times \Phi_{n_\varphi}\setminus\ker\mathcal Q_h\mathcal I_h^u\right)
+        &= \dim \left(W_h\times \Phi_h\setminus\ker\mathcal Q_h\right) \\
+        &= \dim(W_h\times\Phi_h) - \dim(\ker \mathcal Q_h) \\
+        &= \dim(\mathrm{Im} \mathcal Q_h) \\
+        &= \dim Q_h = 2n_q
+    \end{split}
+\end{equation}
+\begin{equation}
+\ker \mathcal Q = \ker \mathcal Q^\Omega \cap \ker \mathcal Q^{\Gamma_w}\mathcal T^{\Gamma_w}
+\end{equation}
+\begin{equation}\label{eq:dim_relation_}
+    \begin{split}
+        &\dim(W_{n_w}\times\Phi_{n_\varphi}\setminus\ker\mathcal Q) \\
+        =&\dim \left(W_{n_w}\times\Phi_{n_\varphi}\setminus (\ker\mathcal Q^\Omega\cap\ker\mathcal Q^{\Gamma_w}\mathcal T^{\Gamma_w})\right) \\
+        =&\dim\left(W_{n_w}\times\Phi_{n_\varphi} \setminus \ker \mathcal Q^\Omega\right)
+        \cup 
+        \dim\left(W_{n_w}\times\Phi_{n_\varphi}\setminus \ker \mathcal Q^{\Gamma_w}\mathcal T^{\Gamma_w}\right) \\
+        =& \dim\left(W_{n_w}\times\Phi_{n_\varphi}\setminus\ker \mathcal Q^\Omega\right)
+        +\dim\left(W_{n_w}\times\Phi_{n_\varphi}\setminus \ker \mathcal Q^{\Gamma_w}\mathcal T^{\Gamma_w}\right) \\
+        -&\dim\left((W_{n_w}\times\Phi_{n_\varphi}\setminus\ker \mathcal Q^\Omega)\cap (W_{n_w}\times\Phi_{n_\varphi}\setminus \ker \mathcal Q^{\Gamma_w}\mathcal T^{\Gamma_w})\right)
+    \end{split}
+\end{equation}
+\begin{equation}
+W_{n_w}\times \Phi_{n_\varphi} = \left \{\begin{split}
+&\overbrace{
 \begin{pmatrix}
 1 \\ 0 \\ 0
 \end{pmatrix},
@@ -197,20 +262,65 @@ y \\ 0 \\ 1
 \begin{pmatrix}
 x^2 \\ 2x \\ 0
 \end{pmatrix},
-\dots
-\right \}
+\begin{pmatrix}
+xy \\ y \\ x
+\end{pmatrix},
+\begin{pmatrix}
+y^2 \\ 0 \\ 2y
+\end{pmatrix},
+\dots}^{\ker \mathcal Q^\Omega}, \\
+&\underbrace{
+\begin{pmatrix}
+0 \\ 1 \\ 0
+\end{pmatrix},
+\begin{pmatrix}
+0 \\ 0 \\ 1
+\end{pmatrix},
+\begin{pmatrix}
+0 \\ x \\ 0
+\end{pmatrix},
+\begin{pmatrix}
+0 \\ 0 \\ x
+\end{pmatrix},
+\begin{pmatrix}
+0 \\ y \\ 0
+\end{pmatrix},
+\begin{pmatrix}
+0 \\ 0 \\ y
+\end{pmatrix},
+\dots}_{W_{n_w}\times\Phi_{n_\varphi}\setminus \ker Q^\Omega}
+\end{split}\right \}
 \end{equation}
 \begin{equation}
-\dim \ker \mathcal Q = \min (n_w,n_s)
+\dim \ker \mathcal Q^\Omega = \min (n_w,n_s)
 \end{equation}
-\begin{equation}
-[n] = \frac{\sqrt{1+8n}-3}{2},\quad
-\langle n \rangle = \frac{(n+1)(n+2)}{2}
-\end{equation}
-where $\langle [n] \rangle = n$
 \begin{equation}
 \langle \lfloor [n_\varphi] \rfloor+1 \rangle \le n_s \le \langle \lceil[n_\varphi]\rceil + 1 \rangle
 \end{equation}
 \begin{equation}
+\dim\left(W_{n_w}\times\Phi_{n_\varphi}\setminus\ker \mathcal Q^\Omega\right) = n_w + 2n_\varphi - \min (n_w,n_s)
+\end{equation}
+
+\begin{equation}
+    \begin{split}
+        \dim\left(W_{n_w}\times\Phi_{n_\varphi}\setminus\ker\mathcal Q^{\Gamma_w}\mathcal T^{\Gamma_w}\right)
+        &= \dim \left(W_{n_w^\Gamma}\setminus \ker \mathcal Q^{\Gamma_w}\right) \\
+        &= \dim W_{n_w^\Gamma} - \dim \left( \ker \mathcal Q^{\Gamma_w}\right) \\
+        &= \dim \left( \mathrm{Im} \mathcal Q^{\Gamma_w}\right) \\
+    \end{split}
+\end{equation}
+\begin{equation}
+\dim\left(W_{n_w}\times\Phi_{n_\varphi}\ker\mathcal Q\right)
+\end{equation}
+
+
+\begin{equation}
+2n_q \le n_w + 2n_\varphi - \min (n_w,n_s)
+\end{equation}
+\begin{equation}
 n_w^{\textrm{opt}} = \langle \lfloor [n_q] \rfloor -1 \rangle, \quad n_q^{\textrm{opt}} = n_\varphi
 \end{equation}
+
+\begin{rmk}
+It should be noted that all the nodal discretization is so well-pose that the monomial basis number of equivalent polynomial space is equal to the degree of freedoms for approximation space, i.g $\dim W_{n_w} = \dim W_h = n_w$.
+\end{rmk}
