@@ -27,7 +27,7 @@ The detailed path for the complete-polynormial-based estimate method is lised in
 Consequently, the optimal ratio of degrees of freedoms (DOFs) between variables can be revealed based on these two estimators.
 
 \subsection{Estimator for $\beta_q$}
-The coefficient $\beta$ controls the behavior of shear force locking in Eq. \eqref{eq:force_locking_weak}, the detailed enforcement is listed as follows:
+The coefficient $\beta_q$ controls the behavior of shear force locking in Eq. \eqref{eq:force_locking_weak}, the detailed enforcement is listed as follows:
 \begin{equation}
     \begin{aligned}
         &b_w(\delta w_h, \boldsymbol q_h) - f_w(\delta w_h) = (\delta w_h, \mathcal W \boldsymbol q_h) - f_w(\delta w_h) \\
@@ -55,7 +55,7 @@ According to Theorem.\ref{thm:estimator}, the completed-polynomial-based estimat
 \end{equation}
 in which $\mathcal I_h^q:Q_{n_q}\rightarrow Q_h$ is the interpolation operator for shear force resultant.
 $\mathcal W_h:Q_h\rightarrow W_h$ is the orthogonal operator of $\mathcal W$, i.e. $(\delta w_h, \mathcal W \boldsymbol q_h - \mathcal W_h \boldsymbol q_h)=0$.
-$Q_{n_q}\subset Q$ is the polynomial space with the identical dimensions with $Q_h$, i.e. $\dim Q_{n_q} = \dim Q_h = 2n_q$.
+$Q_{n_q}\subset Q$ is the polynomial space that has the identical dimensions with $Q_h$, i.e. $\dim Q_{n_q} = \dim Q_h = 2n_q$.
 
 From Eq. \eqref{eq:beta_q}, the LBB condition of Eq. \eqref{eq:LBB_q} can be maintained while the first term on right-hand side of Eq. \eqref{eq:beta_q} is non-zero, which should be necessarily required that:
 \begin{equation}\label{eq:dim_relation_1}
@@ -101,7 +101,7 @@ Because of the $Q_{n_q}$ is the second order polynomial tensor space with dimens
 and the $\mathcal W^\Omega$ is the divergence operator acting on $Q_{n_q}$, the polynomial in $\mathrm{Im} \mathcal W^\Omega$ is one order lower than polynomial order of $Q_{n_q}$.
 The following equation presents the detailed monomial basis of $Q_{n_q}$, and the kernel space of operator $\mathcal W^\Omega$:
 \begin{equation}
-    Q_{n_q} = \left \{
+    Q_{n_q} = \mathrm{span} \left \{
         \underbrace{
         \begin{pmatrix}
             1 \\ 0
@@ -138,9 +138,10 @@ Therefore, the dimension of $\mathrm{Im} \mathcal W^\Omega$ can be estimated by:
 \begin{equation}\label{eq:dim_relation_3_1}
     \langle \lfloor [n_q] \rfloor - 1\rangle \le \dim(\mathrm{Im} \mathcal W^\Omega) \le \langle \lceil [n_q] \rceil -1 \rangle
 \end{equation}
+in which $\lfloor\bullet\rfloor$ and $\lceil\bullet\rceil$ are the floor and ceiling functions, respectively.
 
 
-For the second term regarding the kernel space of $\mathcal W^{\Gamma_q} \mathcal T^{\Gamma_q}$, 
+For the second term regarding the kernel space of $\mathcal W^{\Gamma_q} \mathcal T^{\Gamma_q}$, leading the Lemma.\ref{lma:trace} listed in \ref{sec:functional}, the dimension of $Q_{n_q}\setminus\ker \mathcal W^{\Gamma_q}\mathcal T^{\Gamma_q}$ becomes:
 \begin{equation}\label{eq:dim_relation_3_2_1}
     \begin{aligned}
         \dim\left(Q_{n_q}\setminus\ker \mathcal W^{\Gamma_q}\mathcal T^{\Gamma_q}\right)&=
@@ -153,7 +154,7 @@ where $Q_{n_q^\Gamma}\subset Q\vert_{\Gamma_q}$ is the polynomial space with the
 i.e. $\dim Q_{n_q^\Gamma} = \dim \mathcal T^{\Gamma_q}(Q_h) = 2n_q^\Gamma$.
 For instance, the detailed monomial basis of $Q_{n_q^\Gamma}$ is listed as follows:
 \begin{equation}\label{eq:Q_n_q_gamma}
-   \mathcal Q_{n_q^\Gamma} = \left \{
+    Q_{n_q^\Gamma} = \mathrm{span} \left \{
         \underbrace{
         \begin{pmatrix}
             n_2 \\ -n_1
@@ -193,13 +194,14 @@ With the consideration of Eqs. \eqref{eq:dim_relation_3}, \eqref{eq:dim_relation
 It is noted that the dimension of the trace space $\mathcal T^{\Gamma_q}(Q_h)$ is generally identical to the number of DOFs on $\Gamma_q$, i.g. for finite element approximation.
 So generally speaking, $n_q^\Gamma \ll \langle\lfloor[n_q]\rfloor-1\rangle$.
 To totally ensure the LBB condition of Eq. \eqref{eq:LBB_q}, considering Eqs. \eqref{eq:dim_relation_1}, \eqref{eq:dim_relation_2} and \eqref{eq:dim_relation_4}, the $n_w$ should be always less than the low bound of $Q_{n_q}\setminus\ker\mathcal W$'s dimension, i.e.:  
-\begin{equation}
+\begin{equation}\label{eq:dim_relation_5}
     n_w \le \langle\lfloor[n_q]\rfloor-1\rangle
 \end{equation}
 
 
 
 \subsection{Estimator for $\beta_\gamma$}
+The behavior of shear strain locking in Eq. \eqref{eq:LBB_gamma} is controlled by the coefficient $\beta_\Gamma$, where the shear strain locking contains two parts as follows: 
 \begin{equation}
     \begin{aligned}
         &b(\delta \boldsymbol q_h, \boldsymbol u_h) - f_q(\delta \boldsymbol q_h)  = (\delta \boldsymbol q_h, \mathcal Q \boldsymbol u_h) - f_q(\delta \boldsymbol q_h)\\
@@ -207,7 +209,8 @@ To totally ensure the LBB condition of Eq. \eqref{eq:LBB_q}, considering Eqs. \e
         =& 0
     \end{aligned}
 \end{equation}
-\begin{equation}
+where the product operator herein stands for the tensors. And the operator $\mathcal Q:W\times\Phi\rightarrow Q$ is defined individually in the domain $\Omega$ and on the boundary $\Gamma_w$ by:
+\begin{equation}\label{eq:mathcal_Q}
 \mathcal Q = \left\{
     \begin{aligned}
         &\mathcal Q^\Omega = \{\nabla, -\} & & \text{in}\;\Omega \\
@@ -215,14 +218,22 @@ To totally ensure the LBB condition of Eq. \eqref{eq:LBB_q}, considering Eqs. \e
     \end{aligned}
 \right.
 \end{equation}
-\begin{equation}
+in which, in accordance with trace theorem \cite{}, $\mathcal T^w:W\times\Phi\rightarrow W\vert_{\Gamma_w}$ is the trace operator mapping displacement $\boldsymbol u$ from domain $\Omega$ to boundary $\Gamma_w$. 
+Again, introducing the Theorem. \ref{thm:estimator}, the $\beta_\gamma$ can further be bounded by:
+\begin{equation}\label{eq:beta_gamma}
 \beta_\gamma\le\inf_{U'\subset W_{n_w}\times \Phi_{n_\varphi}\setminus \ker \mathcal Q_h\mathcal I_h^u} \sup_{\boldsymbol u_h \in U'}
 \frac{\Vert \mathcal Q \boldsymbol u\Vert_Q}{\Vert \boldsymbol u \Vert_{W\times \Phi}} + O(h)
 \end{equation}
-\begin{equation}
+where $\mathcal I_h^u: W_{n_w}\times\Phi_{n_\varphi}\rightarrow W_h\times\Phi_h$ is the interpolation operator for deflection $w$ and rotation $\boldsymbol \varphi$, 
+and $W_{n_w}$, $\Phi_{n_\varphi}$ are the polynomial spaces that have the identical dimensions with $W_h$, $\Phi_h$ respectively,
+i.e. $\dim W_{n_w} = \dim W_h = n_w$, $\dim \Phi_{n_\varphi} = \dim \Phi_h = 2n_\varphi$.
+
+To maintain the LBB condition of \eqref{eq:LBB_gamma}, i.e. $\beta_\gamma$ is a coefficient independent with characterized length $h$, the dimensions of the relative spaces in Eq. \eqref{eq:beta_gamma} should satisfy the following relationship:
+\begin{equation}\label{eq:dim_relation_6}
 \dim \left(W_{n_w}\times\Phi_{n_\varphi}\setminus\ker\mathcal Q_h \mathcal I_h^u\right) \le
 \dim \left(W_{n_w}\times\Phi_{n_\varphi}\setminus\ker\mathcal Q\right)
 \end{equation}
+The left-hand side of Eq. \eqref{eq:dim_relation_6} can be represented by the DOFs of approximated shear force resultant:
 \begin{equation}
     \begin{split}
         \dim \left(W_{n_w}\times \Phi_{n_\varphi}\setminus\ker\mathcal Q_h\mathcal I_h^u\right)
@@ -232,10 +243,9 @@ To totally ensure the LBB condition of Eq. \eqref{eq:LBB_q}, considering Eqs. \e
         &= \dim Q_h = 2n_q
     \end{split}
 \end{equation}
-\begin{equation}
-\ker \mathcal Q = \ker \mathcal Q^\Omega \cap \ker \mathcal Q^{\Gamma_w}\mathcal T^{\Gamma_w}
-\end{equation}
-\begin{equation}\label{eq:dim_relation_}
+
+On the other hand, with De Morgan's theorem and Grassmann's theorem \cite{}, the right-hand side of Eq. \eqref{eq:dim_relation_6} becomes:
+\begin{equation}\label{eq:dim_relation_7}
     \begin{split}
         &\dim(W_{n_w}\times\Phi_{n_\varphi}\setminus\ker\mathcal Q) \\
         =&\dim \left(W_{n_w}\times\Phi_{n_\varphi}\setminus (\ker\mathcal Q^\Omega\cap\ker\mathcal Q^{\Gamma_w}\mathcal T^{\Gamma_w})\right) \\
@@ -247,8 +257,12 @@ To totally ensure the LBB condition of Eq. \eqref{eq:LBB_q}, considering Eqs. \e
         -&\dim\left((W_{n_w}\times\Phi_{n_\varphi}\setminus\ker \mathcal Q^\Omega)\cap (W_{n_w}\times\Phi_{n_\varphi}\setminus \ker \mathcal Q^{\Gamma_w}\mathcal T^{\Gamma_w})\right)
     \end{split}
 \end{equation}
+where the relationship of $\ker \mathcal Q = \ker \mathcal Q^\Omega \cap \ker \mathcal Q^{\Gamma_w}\mathcal T^{\Gamma_w}$ is used herein.
+Similarly, this dimension of Eq. \eqref{eq:dim_relation_7} is consisted of two terms, one relates to the kernel space of $\mathcal Q^\Omega$ in $\Omega$, the other relates to the kernel space of $\mathcal Q^{\Gamma_w}\mathcal T^w$ on $\Gamma_w$.
+
+The dimension of first term regarding the kernel space of $\mathcal Q^\Omega$ can be revealed by the detailed expression of monomial basis of $W_{n_w}\times \Phi_{n_\varphi}$ as:
 \begin{equation}
-W_{n_w}\times \Phi_{n_\varphi} = \left \{\begin{split}
+W_{n_w}\times \Phi_{n_\varphi} = \mathrm{span} \left \{\begin{split}
 &\overbrace{
 \begin{pmatrix}
 1 \\ 0 \\ 0
@@ -291,36 +305,55 @@ y^2 \\ 0 \\ 2y
 \dots}_{W_{n_w}\times\Phi_{n_\varphi}\setminus \ker Q^\Omega}
 \end{split}\right \}
 \end{equation}
+Obviously, the monomial basis of deflection $w$ is one order higher than that of rotation in $\ker \mathcal Q^\Omega$.
+So the dimension of $\ker \mathcal Q^\Omega$ can be evaluated by:
 \begin{equation}
 \dim \ker \mathcal Q^\Omega = \min (n_w,n_s)
 \end{equation}
+with
 \begin{equation}
 \langle \lfloor [n_\varphi] \rfloor+1 \rangle \le n_s \le \langle \lceil[n_\varphi]\rceil + 1 \rangle
 \end{equation}
-\begin{equation}
-\dim\left(W_{n_w}\times\Phi_{n_\varphi}\setminus\ker \mathcal Q^\Omega\right) = n_w + 2n_\varphi - \min (n_w,n_s)
+where $n_w$ presents the number of monomial basis for $w$. $n_s$ stands for the monomial basis number with one order higher than $\Phi_{n_\varphi}$'s monomial basis.
+Then, the dimension of $W_{n_w}\times\Phi_{n_\varphi}\setminus\ker \mathcal Q^\Omega$ can be evaluated by: 
+\begin{equation}\label{eq:dim_relation_8}
+    \begin{split}
+        \dim\left(W_{n_w}\times\Phi_{n_\varphi}\setminus\ker \mathcal Q^\Omega\right) &= \dim\left(W_{n_w}\times\Phi_{n_\varphi}\right) - \dim\left(\ker \mathcal Q^\Omega\right) \\
+        &=n_w + 2n_\varphi - \min (n_w,n_s)
+    \end{split}
 \end{equation}
 
-\begin{equation}
+To further calculate the dimension of the second term regarding the kernel space of $\mathcal Q^{\Gamma_w}\mathcal T^{\Gamma_w}$, we first suppose the trace space $\mathcal T^{\Gamma_w}(W_h\times\Phi_h)$ and its corresponding polynomial space $W_{n_w^\Gamma}$, $\dim W_{n_w^\Gamma}=\dim \mathcal T^{\Gamma_w}(W_h\times\Phi_h)=n_w^\Gamma$.
+Using the Lemma.\ref{lma:trace} in \ref{sec:functional}, we have:
+\begin{equation}\label{eq:dim_relation_9}
     \begin{split}
         \dim\left(W_{n_w}\times\Phi_{n_\varphi}\setminus\ker\mathcal Q^{\Gamma_w}\mathcal T^{\Gamma_w}\right)
         &= \dim \left(W_{n_w^\Gamma}\setminus \ker \mathcal Q^{\Gamma_w}\right) \\
-        &= \dim W_{n_w^\Gamma} - \dim \left( \ker \mathcal Q^{\Gamma_w}\right) \\
-        &= \dim \left( \mathrm{Im} \mathcal Q^{\Gamma_w}\right) \\
+        &= \dim W_{n_w^\Gamma} - \underbrace{\dim \left( \ker \mathcal Q^{\Gamma_w}\right)}_0 \\
+        &= \dim W_{n_w^\Gamma} = n_w^\Gamma \\
     \end{split}
 \end{equation}
-\begin{equation}
-\dim\left(W_{n_w}\times\Phi_{n_\varphi}\ker\mathcal Q\right)
-\end{equation}
+where, it can reveal from the expression of $\mathcal Q^{\Gamma_w}$ in Eq.\eqref{eq:mathcal_Q} that, the space $\ker \mathcal Q^{\Gamma^w}$ is empty, i.e $\dim(\ker \mathcal Q^{\Gamma^w} = 0$). 
 
+Consequently, substituting Eqs.\eqref{eq:dim_relation_8} and \eqref{eq:dim_relation_9} into Eq.\eqref{eq:dim_relation_7}, the right-hand side of Eq.\eqref{eq:dim_relation_6} can be rewritten as:
+\begin{multline}
+    \max(n_w + 2n_\varphi - \min (n_w,n_s),n_w^\Gamma) \le
+    \dim\left(W_{n_w}\times\Phi_{n_\varphi}\setminus\ker\mathcal Q\right) \\ \le
+    n_w + 2n_\varphi - \min (n_w,n_s) + n_w^\Gamma
+\end{multline}
+It is clear that $n_w^\Gamma \ll n_w + 2n_\varphi - \min (n_w,n_s)$ 
+FIXME
 
 \begin{equation}
-2n_q \le n_w + 2n_\varphi - \min (n_w,n_s)
+n_q \le n_\varphi
 \end{equation}
 \begin{equation}
-n_w^{\textrm{opt}} = \langle \lfloor [n_q] \rfloor -1 \rangle, \quad n_q^{\textrm{opt}} = n_\varphi
+    n_w^{\mathrm{opt}} = \langle\lfloor[n_q]\rfloor-1\rangle
+    ,\quad
+    n_q^{\mathrm{opt}} = n_\varphi
 \end{equation}
 
 \begin{rmk}
-It should be noted that all the nodal discretization is so well-pose that the monomial basis number of equivalent polynomial space is equal to the degree of freedoms for approximation space, i.g $\dim W_{n_w} = \dim W_h = n_w$.
+It should be noted that, the proposed estimator is considered for the entire domain and all the nodal discretization should be so well-pose that the monomial basis number of equivalent polynomial space is equal to the degree of freedoms for approximation space, i.g $\dim W_{n_w} = \dim W_h = n_w$.
+While a local domain contains a too dense nodal distribution than others, the nodal discretization satisfied the estimator will still meet the locking issue in local.
 \end{rmk}
