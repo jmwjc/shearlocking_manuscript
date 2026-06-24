@@ -1,0 +1,124 @@
+\section{Reproducing kernel smoothed gradient method for Mindlin plate formulation}\label{sec:rkgsi}
+\begin{equation}
+\begin{split}
+\Pi(w,\boldsymbol \varphi,\boldsymbol q,\boldsymbol m) &=
+-\int_{\Omega} \frac{1}{2} \boldsymbol m : \boldsymbol D^{-1} : \boldsymbol m d\Omega -
+\int_{\Omega} \frac{1}{2} \frac{\boldsymbol q\cdot \boldsymbol q}{kGh} d\Omega \\ &-
+\int_{\Gamma_{\varphi}} \boldsymbol n\cdot \boldsymbol m \cdot \bar{\boldsymbol \varphi} d\Gamma - 
+\int_{\Gamma_{w}} \boldsymbol q\cdot\boldsymbol n \bar{w} d\Gamma \\ &-
+\int_{\Gamma_{m}} \boldsymbol \varphi\cdot (\boldsymbol m\cdot \boldsymbol n - \bar{\boldsymbol m}_n) d\Gamma -
+\int_{\Omega} \boldsymbol \varphi \cdot (\nabla \cdot \boldsymbol m - \boldsymbol q) d\Omega \\ &+
+\int_{\Gamma_{q}} w(\boldsymbol q\cdot \boldsymbol n - \bar{\boldsymbol q}_n) d\Gamma - 
+\int_{\Omega} w(\nabla \cdot \boldsymbol q + \bar{p}) d\Omega
+\end{split}
+\end{equation}
+
+\begin{equation}\label{eq:mix_weak_form}
+\begin{aligned}
+a_m(\delta \boldsymbol m, \boldsymbol m) + b_{m}(\delta\boldsymbol m,\boldsymbol \varphi) &= f_{m}(\delta \boldsymbol m), & \forall \delta \boldsymbol m \in M \\
+a_q(\delta \boldsymbol q,\boldsymbol q) + b_q(\delta \boldsymbol q,\boldsymbol u) &= f_{q}(\delta \boldsymbol q), & \forall \delta \boldsymbol q \in Q \\
+b_{w}(\delta w,\boldsymbol q) &= f_{w}(\delta w), & \forall \delta w \in W \\
+b_m(\delta \boldsymbol \varphi, \boldsymbol m) + b_{\varphi}(\delta\boldsymbol \varphi,\boldsymbol q) &= f_{\varphi}(\delta \boldsymbol \varphi), & \forall \delta \boldsymbol \varphi \in \Phi \\
+\end{aligned}
+\end{equation}
+\begin{align}
+a_m(\delta\boldsymbol m,\boldsymbol m) &= -\int_{\Omega} \delta \boldsymbol m : \frac{12}{t^3}\boldsymbol D^{-1}: \boldsymbol m d\Omega \\
+b_m(\boldsymbol m, \boldsymbol \varphi) &= - \int_{\Gamma_{m}} \boldsymbol n \cdot \boldsymbol m \cdot \boldsymbol \varphi d\Gamma + \int_{\Omega} \nabla \boldsymbol m \cdot \boldsymbol  \varphi d\Omega\\
+f_{m}(\boldsymbol \varphi, \boldsymbol q) &= \int_{\Gamma_{\varphi}} \boldsymbol n \cdot \boldsymbol m\cdot \bar{\boldsymbol \varphi} d\Gamma \\
+\end{align}
+
+\begin{equation}
+-\int_{\Omega} \delta \boldsymbol m : \boldsymbol D^{-1}: \boldsymbol m d\Omega - \int_{\Gamma_{m}} \boldsymbol n \cdot \delta \boldsymbol m \cdot \boldsymbol \varphi d\Gamma + \int_{\Omega} \nabla \delta \boldsymbol m \cdot \boldsymbol  \varphi d\Omega = \int_{\Gamma_{\varphi}} \boldsymbol n \cdot \delta \boldsymbol m\cdot \bar{\boldsymbol \varphi} d\Gamma
+\end{equation}
+\begin{equation}
+- \int_{\Omega} \frac{\delta \boldsymbol q\cdot \boldsymbol q}{kGh} d\Omega + \int_{\Gamma_{q}} \delta \boldsymbol q\cdot \boldsymbol n w d\Gamma - \int_{\Omega}\nabla \cdot \delta \boldsymbol q w d\Omega + \int_{\Omega}\delta \boldsymbol q\cdot \boldsymbol \varphi d\Omega = - \int_{\Gamma_{w}} \delta \boldsymbol q\cdot \boldsymbol n \bar{w} d\Gamma
+\end{equation}
+\begin{equation}
+\int_{\Gamma_q} \delta w \boldsymbol q\cdot \boldsymbol n d\Gamma - \int_\Omega \delta w \nabla \cdot \boldsymbol q d\Omega = \int_{\Gamma_q}\delta w \bar{\boldsymbol q}_n d\Gamma - \int_\Omega \delta w \bar p d\Omega
+\end{equation}
+\begin{equation}
+- \int_{\Gamma_m} \delta \boldsymbol \varphi \cdot \boldsymbol m \cdot \boldsymbol n d\Gamma - \int_\Omega \delta \boldsymbol \varphi \cdot \boldsymbol m \cdot \nabla d\Omega + \int_\Omega \delta \boldsymbol \varphi \cdot \boldsymbol q d\Omega = - \int_{\Gamma_m} \delta \boldsymbol \varphi \cdot \bar{\boldsymbol m}_n d\Gamma
+\end{equation}
+
+
+\begin{equation}
+-\int_{\Omega_C} \delta m_{\alpha \beta} D_{\alpha \beta \gamma \eta}^{-1} m_{\gamma \eta} d\Omega - \int_{\Gamma_C} \delta M_{\alpha \beta} n_{\beta} \varphi_{\alpha} d\Gamma + \int_{\Omega_C} \delta M_{\alpha \beta,\beta} \varphi d\Omega + \int_{\Gamma_\varphi\cap\Gamma_C} \delta M_{\alpha \beta} n_{\beta} \varphi_{\alpha} d\Gamma = \int_{\Gamma_{\varphi}\cap\Gamma_C} M_{\alpha \beta} n_{\beta} \bar{\varphi}_{\alpha} d\Gamma
+\end{equation}
+\begin{equation}
+m_{\alpha\beta h}(\boldsymbol x) = \boldsymbol p^T(\boldsymbol x)\boldsymbol a_{\alpha\beta C}
+\quad \mathrm{in}\;\Omega_C
+\end{equation}
+\begin{equation}
+\boldsymbol a_{\alpha\beta C} = D_{\alpha\beta\eta\gamma}\boldsymbol G^{-1}_C
+\left(\sum_{K=1}^{n_\varphi}(\tilde{\boldsymbol g}_{\eta K} + \hat{\boldsymbol g}_{\eta K})\varphi_{\gamma K} + \bar{\boldsymbol g}_{\gamma\eta}\right)
+\end{equation}
+\begin{align}
+\tilde{\boldsymbol g}_{\alpha K} &= -\int_{\Gamma_C} \boldsymbol p N_{K}^\varphi n_\alpha d\Gamma
++ \int_{\Omega_C} \boldsymbol p_{,\alpha} N_K^\varphi d\Omega \\
+\bar{\boldsymbol g}_{\alpha K} &= \int_{\Gamma_C\cap\Gamma_\varphi} \boldsymbol p N_{K}^\varphi n_\alpha d\Gamma \\
+\hat{\boldsymbol g}_{\alpha\beta} &= \int_{\Gamma_C\cap\Gamma_\varphi} \boldsymbol p n_\beta \bar \varphi_\alpha d\Gamma \\
+\end{align}
+\begin{equation}
+\boldsymbol m_{h} = \tilde{\boldsymbol m}_h + \hat{\boldsymbol m}_h + \bar{\boldsymbol m}_h 
+\end{equation}
+\begin{equation}
+\boldsymbol m(\boldsymbol \varphi_h) = \boldsymbol D: (\tilde{\boldsymbol \kappa}(\boldsymbol \varphi_h) + \hat{\boldsymbol \kappa}_{h} + \bar{\boldsymbol \kappa}_{\gamma \eta})
+\end{equation}
+\begin{equation}
+\tilde m_{\alpha\beta h} = -D_{\alpha\beta\eta\gamma}(\tilde \kappa_{\gamma\eta h} + \bar \kappa_{\gamma\eta} + \hat \kappa_{\gamma \eta})
+\end{equation}
+with
+\begin{align}
+\tilde \kappa_{\alpha\beta h}(\boldsymbol x) &= -\frac{1}{2}\sum_{K=1}^{n_\varphi} \left(\tilde N_{K,\alpha}^\varphi(\boldsymbol x) \varphi_{\beta K} + \tilde N_{K,\beta}^\varphi(\boldsymbol x) \varphi_{\alpha K}\right) \\
+\bar \kappa_{\alpha\beta h}(\boldsymbol x) &= -\frac{1}{2}\sum_{K=1}^{n_\varphi} \left(\bar N_{K,\alpha}^\varphi(\boldsymbol x) \varphi_{\beta K} + \bar N_{K,\beta}^\varphi(\boldsymbol x) \varphi_{\alpha K}\right) \\
+\hat \kappa_{\alpha\beta h}(\boldsymbol x) &=- \boldsymbol G_C^{-1} \hat{\boldsymbol g}_{\alpha\beta}
+\end{align}
+\begin{align}
+\tilde N_{K,\alpha}^\varphi(\boldsymbol x) &= \boldsymbol p^T(\boldsymbol x) \boldsymbol G^{-1}_C \tilde{\boldsymbol g}_{\alpha K} \\
+\bar N_{K,\alpha}^\varphi(\boldsymbol x) &= \boldsymbol p^T(\boldsymbol x) \boldsymbol G^{-1}_C \bar{\boldsymbol g}_{\alpha K} 
+\end{align}
+\begin{equation}
+\begin{aligned}
+&b_m(\delta \boldsymbol \varphi_h,\boldsymbol m_h) \\
+=& - \int_{\Gamma_m} \delta \boldsymbol \varphi_h \cdot \boldsymbol m_h \cdot \boldsymbol n d\Gamma + \int_\Omega \delta \boldsymbol \varphi_h \cdot \boldsymbol m_h \cdot \nabla d\Omega \\
+=& - \int_{\Gamma} \delta \varphi_{\alpha h} m_{\alpha\beta h} n_\beta d\Gamma + \int_\Omega \delta m_{\alpha\beta h,\beta} \varphi_{\alpha h} d\Omega + \int_{\Gamma_\varphi} \delta \varphi_{\alpha h} m_{\alpha\beta h} n_\beta d\Gamma \\
+=& \sum_{C=1}^{n_e}\sum_{K,L=1}^{n_\varphi} \delta \varphi_{\alpha K} \left(
+    - \int_{\Gamma_C} \boldsymbol p N_K^\varphi n_\beta d\Gamma + \int_{\Omega_C} \boldsymbol p_{,\beta} N_K^\varphi d\Omega + \int_{\Gamma_C\cap \Gamma_\varphi} \boldsymbol p N_K^\varphi n_\beta d\Gamma
+\right) D_{\alpha\beta\gamma\eta}\boldsymbol G_C^{-1}\left((\tilde{\boldsymbol g}_{\eta L}+\bar{\boldsymbol g}_{\eta L})\varphi_{\gamma L} + \hat{\boldsymbol g}_{\gamma\eta}\right) \\
+=& \sum_{C=1}^{n_e}\sum_{K,L=1}^{n_\varphi} \delta \varphi_{\alpha K}\left(
+    \int_{\Omega_C} \tilde{\boldsymbol g}^T_{\beta K}\boldsymbol p D_{\alpha\beta\gamma\eta}\boldsymbol G_C^{-1} \tilde{\boldsymbol g}_{\eta L}
+\right) \varphi_{\gamma L}
+\end{aligned}
+\end{equation}
+\begin{equation}
+\begin{aligned}
+&b_m(\delta \boldsymbol \varphi_h,\tilde{\boldsymbol m}_h) \\
+=& - \int_{\Gamma_m} \delta \boldsymbol \varphi_h \cdot \tilde{\boldsymbol m}_h \cdot \boldsymbol n d\Gamma + \int_\Omega \delta \boldsymbol \varphi_h \cdot \tilde{\boldsymbol m}_h \cdot \nabla d\Omega \\
+=& \underbrace{- \int_{\Gamma} \delta \boldsymbol \varphi_h \cdot \tilde{\boldsymbol m}_h \cdot \boldsymbol n d\Gamma + \int_\Omega \delta \boldsymbol \varphi_h \cdot \tilde{\boldsymbol m}_h \cdot \nabla d\Omega}_{\int_\Omega \delta \tilde{\boldsymbol \kappa}: \frac{t^3}{12}\boldsymbol D:\tilde{\boldsymbol \kappa} d\Omega} + \int_{\Gamma_{\varphi}} \delta \boldsymbol \varphi_h \cdot \tilde{\boldsymbol m}_h \cdot \boldsymbol n d\Gamma \\
+=& a_\varphi(\tilde{\boldsymbol \kappa}(\delta \boldsymbol \varphi_h),\tilde{\boldsymbol \kappa}(\boldsymbol \varphi_h)) + \tilde b_\varphi(\delta \boldsymbol \varphi_h, \tilde{\boldsymbol m}(\boldsymbol \varphi_h))
+\end{aligned}
+\end{equation}
+\begin{equation}
+b_m(\delta \boldsymbol \varphi_h,\hat{\boldsymbol m}_h) = \tilde b_\varphi(\boldsymbol \varphi_h, \tilde{\boldsymbol m}(\delta \boldsymbol \varphi_h)) + \tilde b_\varphi(\delta \boldsymbol \varphi_h,\hat{\boldsymbol m}(\boldsymbol \varphi_h))
+\end{equation}
+\begin{equation}
+b_m(\delta \boldsymbol \varphi_h,\bar{\boldsymbol m}_h) = \hat f + \bar f
+\end{equation}
+\begin{equation}
+\begin{aligned}
+&b_m(\delta \boldsymbol \varphi_h,\tilde{\boldsymbol m}_h) \\
+=& - \int_{\Gamma_m} \delta \boldsymbol \varphi_h \cdot \tilde{\boldsymbol m}_h \cdot \boldsymbol n d\Gamma + \int_\Omega \delta \boldsymbol \varphi_h \cdot \tilde{\boldsymbol m}_h \cdot \nabla d\Omega \\
+=& - \int_{\Gamma} \delta \varphi_{\alpha h} \tilde m_{\alpha\beta h} n_\beta d\Gamma + \int_\Omega \delta \tilde m_{\alpha\beta h,\beta} \varphi_{\alpha h} d\Omega + \int_{\Gamma_\varphi} \delta \varphi_{\alpha h} \tilde m_{\alpha\beta h} n_\beta d\Gamma \\
+=& \sum_{C=1}^{n_e}\sum_{K,L=1}^{n_\varphi} \delta \varphi_{\alpha K} \left(
+    - \int_{\Gamma_C} \boldsymbol p N_K^\varphi n_\beta d\Gamma + \int_{\Omega_C} \boldsymbol p_{,\beta} N_K^\varphi d\Omega + \int_{\Gamma_C\cap \Gamma_\varphi} \boldsymbol p N_K^\varphi n_\beta d\Gamma
+\right) D_{\alpha\beta\gamma\eta}\boldsymbol G_C^{-1}\tilde{\boldsymbol g}_{\eta L} \\
+=& \sum_{C=1}^{n_e}\sum_{K,L=1}^{n_\varphi} \delta \varphi_{\alpha K}(\tilde{\boldsymbol g}_{\beta K} + \hat{\boldsymbol g}_{\beta K})\boldsymbol G_C^{-1} \int_{\Omega_C} \boldsymbol p D_{\alpha\beta\gamma\eta}\boldsymbol p^T d\Omega \boldsymbol G_C^{-1} \tilde{\boldsymbol g}_{\eta L} \\
+=& \sum_{C=1}^{n_e} \left(
+    \int_{\Omega_C} \underbrace{\sum_{K=1}^{n_\varphi}\boldsymbol p^T\boldsymbol G_C^{-1}\tilde{\boldsymbol g}_{\beta K}\delta \varphi_{\alpha K}}_{\delta \tilde \kappa_{\alpha\beta}} D_{\alpha\beta\gamma\eta} \underbrace{\sum_{L=1}^{n_\varphi} \boldsymbol G_C^{-1}\tilde{\boldsymbol g}_{\eta L} \varphi_{\gamma L}}_{\tilde \kappa_{\gamma\eta}}
+\right) \\
++& \sum_{C=1}^{n_e} \left(
+    \int_{\Omega_C} \underbrace{\sum_{K=1}^{n_\varphi}\boldsymbol p^T\boldsymbol G_C^{-1}\bar{\boldsymbol g}_{\beta K}\delta \varphi_{\alpha K}}_{\delta \bar \kappa_{\alpha\beta}} D_{\alpha\beta\gamma\eta} \underbrace{\sum_{L=1}^{n_\varphi} \boldsymbol G_C^{-1}\tilde{\boldsymbol g}_{\eta L} \varphi_{\gamma L}}_{\tilde \kappa_{\gamma\eta}}
+\right) \\
+=& a_\varphi \left(\tilde{\boldsymbol \kappa}(\delta \boldsymbol \varphi),\tilde{\boldsymbol \kappa}(\boldsymbol \varphi)\right) +a_\varphi \left(\hat{\boldsymbol \kappa}(\delta \boldsymbol \varphi),\tilde{\boldsymbol \kappa}(\boldsymbol \varphi)\right)
+\end{aligned}
+\end{equation}

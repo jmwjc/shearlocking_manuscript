@@ -347,7 +347,7 @@ FIXME
 \begin{equation}
 n_q \le n_\varphi
 \end{equation}
-\begin{equation}
+\begin{equation}\label{eq:opt_n}
     n_w^{\mathrm{opt}} = \langle\lfloor[n_q]\rfloor-1\rangle
     ,\quad
     n_q^{\mathrm{opt}} = n_\varphi
@@ -356,4 +356,8 @@ n_q \le n_\varphi
 \begin{rmk}
 It should be noted that, the proposed estimator is considered for the entire domain and all the nodal discretization should be so well-pose that the monomial basis number of equivalent polynomial space is equal to the degree of freedoms for approximation space, i.g $\dim W_{n_w} = \dim W_h = n_w$.
 While a local domain contains a too dense nodal distribution than others, the nodal discretization satisfied the estimator will still meet the locking issue in local.
+\end{rmk}
+
+\begin{rmk}
+The shear force locking will influence the shear strain locking.
 \end{rmk}

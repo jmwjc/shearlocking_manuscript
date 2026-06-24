@@ -74,7 +74,7 @@ Consequently, the governing equations for Reissner-Mindlin plate can be expresse
 \nabla \cdot \boldsymbol m - \boldsymbol q &= \boldsymbol 0 & &\textrm{in}\; \Omega \\
 \nabla \cdot \boldsymbol q + \bar p &= 0 & &\textrm{in}\; \Omega \\
 \boldsymbol q \cdot \boldsymbol  n &= \bar q_n & &\textrm{on}\; \Gamma_q \\
-\boldsymbol m \cdot \boldsymbol n &= \bar{\boldsymbol m} & &\textrm{on}\; \Gamma_m \\
+\boldsymbol m \cdot \boldsymbol n &= \bar{\boldsymbol m}_n & &\textrm{on}\; \Gamma_m \\
 \boldsymbol \varphi &= \bar{\boldsymbol \varphi} & &\textrm{on}\; \Gamma_\varphi \\
 w &= \bar w & &\textrm{on}\; \Gamma_w \\
 \end{aligned}
@@ -101,7 +101,7 @@ To obtain the corresponding Galerkin weak form, the complementary energy functio
     \begin{aligned}
         \Pi(\boldsymbol u, \boldsymbol q) &=
         \int_\Omega \frac{t^3}{24} \boldsymbol \kappa : \boldsymbol D : \boldsymbol \kappa d\Omega - \int_\Omega \frac{1}{2kGt} \boldsymbol q \cdot \boldsymbol q d\Omega - \int_\Omega \boldsymbol \varphi \cdot \boldsymbol q d\Omega \\
-        &+ \int_{\Gamma_w} \boldsymbol q \cdot \boldsymbol n \bar w d\Gamma + \int_{\Gamma_m} \boldsymbol \varphi \cdot \bar{\boldsymbol m} d\Gamma + \int_{\Gamma_q} w (\boldsymbol q \cdot \boldsymbol n - \bar q_n) d\Gamma \\&- \int_\Omega w (\nabla \cdot \boldsymbol q + \bar p) d\Omega
+        &+ \int_{\Gamma_w} \boldsymbol q \cdot \boldsymbol n \bar w d\Gamma + \int_{\Gamma_m} \boldsymbol \varphi \cdot \bar{\boldsymbol m}_n d\Gamma + \int_{\Gamma_q} w (\boldsymbol q \cdot \boldsymbol n - \bar q_n) d\Gamma \\&- \int_\Omega w (\nabla \cdot \boldsymbol q + \bar p) d\Omega
     \end{aligned}
 \end{equation}
 where $\boldsymbol u$ stands for a displacement set containing deflection $w$ and rotation $\boldsymbol \varphi$, i.e. $\boldsymbol u = \{w,\boldsymbol \varphi\}$.
@@ -109,9 +109,9 @@ Introducing the standard variational operation herein leads to the following Gal
 find $w \in W$, $\boldsymbol \varphi \in \Phi$, $\boldsymbol q \in Q$,
 \begin{equation}\label{eq:weak_form}
 \begin{aligned}
-a(\delta \boldsymbol \varphi, \boldsymbol \varphi) + b_{\varphi}(\delta\boldsymbol \varphi,\boldsymbol q) &= f_{\varphi}(\delta \boldsymbol \varphi), & \forall \delta \boldsymbol \varphi \in \Phi \\
+a_\varphi(\delta \boldsymbol \varphi, \boldsymbol \varphi) + b_{\varphi}(\delta\boldsymbol \varphi,\boldsymbol q) &= f_{\varphi}(\delta \boldsymbol \varphi), & \forall \delta \boldsymbol \varphi \in \Phi \\
 b_{w}(\delta w,\boldsymbol q) &= f_{w}(\delta w), & \forall \delta w \in W \\
-b(\delta \boldsymbol q,\boldsymbol u) &= f_{q}(\delta \boldsymbol q), & \forall \delta \boldsymbol q \in Q
+a_q(\delta \boldsymbol q,\boldsymbol q) + b_q(\delta \boldsymbol q,\boldsymbol u) &= f_{q}(\delta \boldsymbol q), & \forall \delta \boldsymbol q \in Q
 \end{aligned}
 \end{equation}
 where the deflection space $W$, rotation space $\Phi$ and shear force space $Q$ are defined as:
@@ -123,9 +123,10 @@ where the deflection space $W$, rotation space $\Phi$ and shear force space $Q$ 
 and the bilinear forms and linear forms in Eq. \eqref{eq:weak_form} are detailed as follows:
 \begin{align}
 % &a: \Phi \times \Phi \rightarrow \mathbb R &
-a(\delta\boldsymbol \varphi,\boldsymbol \varphi) &= \int_\Omega \delta \boldsymbol \kappa : \frac{t^3}{12} \boldsymbol D : \boldsymbol \kappa d\Omega \\
+a_\varphi(\delta\boldsymbol \varphi,\boldsymbol \varphi) &= \int_\Omega \delta \boldsymbol \kappa : \frac{t^3}{12} \boldsymbol D : \boldsymbol \kappa d\Omega \\
+a_q(\delta\boldsymbol q,\boldsymbol q) &= -\int_\Omega \frac{1}{2kGt} \delta \boldsymbol q \cdot \boldsymbol q d\Omega \\
 % &b: (W\times \Phi)\times Q \rightarrow \mathbb R &
-b( \boldsymbol q, \boldsymbol u) &= b_w(w, \boldsymbol q) + b_\varphi(\boldsymbol \varphi, \boldsymbol q) \\
+b_q(\boldsymbol q, \boldsymbol u) &= b_w(w, \boldsymbol q) + b_\varphi(\boldsymbol \varphi, \boldsymbol q) \\
 % &b_\varphi : \Phi\times Q \rightarrow \mathbb R &
 b_{\varphi}(\boldsymbol \varphi, \boldsymbol q) &= -\int_{\Omega}\boldsymbol \varphi \cdot \boldsymbol q d\Omega \\
 % &b_w : W\times Q \rightarrow \mathbb R &
@@ -134,7 +135,7 @@ b_{w}(w,\boldsymbol q) &= \int_{\Gamma_{q}} w \boldsymbol q \cdot \boldsymbol nd
 &= \int_\Omega \nabla w \cdot \boldsymbol q d\Omega - \int_{\Gamma_w} w \boldsymbol q \cdot \boldsymbol n d\Gamma
 \end{split} \\
 % &f_\varphi: \Phi \rightarrow \mathbb R &
-f_{\varphi}(\boldsymbol \varphi) &= - \int_{\Gamma_{m}} \boldsymbol \varphi \cdot \bar{\boldsymbol m}d\Gamma \\
+f_{\varphi}(\boldsymbol \varphi) &= - \int_{\Gamma_{m}} \boldsymbol \varphi \cdot \bar{\boldsymbol m}_n d\Gamma \\
 % &f_w: W\rightarrow \mathbb R &
 f_{w}(w) &= \int_{\Gamma_{q}} w \bar{q}_n d\Gamma + \int_{\Omega}w \bar{p} d\Omega \\
 % &f_q: Q\rightarrow \mathbb R &
@@ -162,12 +163,52 @@ b(\delta \boldsymbol q_h,\boldsymbol u_h) &= f_{q}(\delta \boldsymbol q_h), & \f
 \end{subequations}
 where $\boldsymbol u_h = \{w_h, \boldsymbol \varphi_h\}^T$. The related approximation spaces are defined as:
 \begin{align}
-    W_h &:= \mathrm{span} \{N_I\}_{I=1}^{n_w} \\
-    \Phi_h &:= \mathrm{span} \{N_K\}_{K=1}^{n_\varphi} \\
-    Q_h &:= \mathrm{span} \{N_R\}_{R=1}^{n_q}
+    W_h &:= \mathrm{span} \{N_I^w\}_{I=1}^{n_w} \\
+    \Phi_h &:= \mathrm{span} \{N_K^\varphi\}_{K=1}^{n_\varphi} \\
+    Q_h &:= \mathrm{span} \{N_R^q\}_{R=1}^{n_q}
 \end{align}
 FIXME: approximation types
+\begin{equation}
+\begin{bmatrix}
+\boldsymbol K^{\varphi\varphi} & \boldsymbol 0 & \boldsymbol K^{q\varphi T} \\
+\boldsymbol 0 & \boldsymbol 0 & \boldsymbol K^{qwT} \\
+\boldsymbol K^{q\varphi} & \boldsymbol K^{qw} & \boldsymbol K^{qq}
+\end{bmatrix}
+\begin{Bmatrix}
+\boldsymbol d^\varphi \\ \boldsymbol d^w \\ \boldsymbol d^q
+\end{Bmatrix} =
+\begin{Bmatrix}
+\boldsymbol f^\varphi \\ \boldsymbol f^w \\ \boldsymbol f^q
+\end{Bmatrix}
+\end{equation}
 
+\begin{equation}
+\left(
+\underbrace{
+\begin{bmatrix}
+\boldsymbol K^{\varphi \varphi} & \boldsymbol 0 \\
+\boldsymbol 0 & \boldsymbol 0
+\end{bmatrix}}_{\boldsymbol K^{\mathrm{bending}}}
++
+\underbrace{
+\begin{bmatrix}
+\tilde{\boldsymbol K}^{\varphi \varphi} & \tilde{\boldsymbol K}^{\varphi w} \\
+\tilde{\boldsymbol K}^{w \varphi} & \tilde{\boldsymbol K}^{ww}
+\end{bmatrix}}_{\tilde{\boldsymbol K}^{\mathrm{shearing}}}
+\right)
+\begin{Bmatrix}
+\boldsymbol d^\varphi \\ \boldsymbol d^w
+\end{Bmatrix} =
+\begin{Bmatrix}
+\boldsymbol f^\varphi - \tilde{\boldsymbol f}^\varphi \\
+\boldsymbol f^w - \tilde{\boldsymbol f}^w 
+\end{Bmatrix}
+\end{equation}
+\begin{align}
+\tilde{\boldsymbol K}^{\varphi \varphi}&=-\boldsymbol K^{q\varphi T}(\boldsymbol K^{qq})^{-1}\boldsymbol K^{q\varphi} \\
+\tilde{\boldsymbol K}^{\varphi w}&=-\boldsymbol K^{q\varphi T}(\boldsymbol K^{qq})^{-1}\boldsymbol K^{qw} \\
+\tilde{\boldsymbol K}^{ww}&=-\boldsymbol K^{qw T}(\boldsymbol K^{qq})^{-1}\boldsymbol K^{qw}
+\end{align}
 \begin{rmk}
     As shown in Eq. \eqref{eq:weak_form_discrete}, there are two constraints in thick plate mixed formulation. One, as listed in Eq. \eqref{eq:force_locking_weak}, is a constraint mainly regarding the shear force resultant on natural boundary $\Gamma_q$ and its divergence in entire domain.
     The other is deflection essential boundary condition $\Gamma_w$ and the shear strain enforcement in whole domain, as listed in Eq. \eqref{eq:strain_locking_weak}.

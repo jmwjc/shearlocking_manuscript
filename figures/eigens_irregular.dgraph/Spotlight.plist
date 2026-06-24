@@ -9,6 +9,7 @@ nˢ
 nˢ_γ_ceil
 nˢ_γ_floor
 nˢ_max
+nb
 
 n_w
 n_q
@@ -22,7 +23,8 @@ n_q
 nˢ
 nˢ_γ_ceil
 nˢ_γ_floor
-nʷ
+nˢ_max
+nb
 
 n_w
 n_q

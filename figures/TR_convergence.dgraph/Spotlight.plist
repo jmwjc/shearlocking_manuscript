@@ -3,34 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>Labels</key>
-	<string>n_w
-n_q
-nˢ
-nˢ_γ_ceil
-nˢ_γ_floor
-nˢ_max
-
-n_w
-n_q
-nˢ
-nˢ_γ_ceil
-nˢ_γ_floor
-nʷ
-
-n_w
-n_q
-nˢ
-nˢ_γ_ceil
-nˢ_γ_floor
-nʷ
-
-n_w
-n_q
-nˢ
-nˢ_γ_ceil
-nˢ_γ_floor
-nʷ
-</string>
+	<string></string>
 	<key>Text</key>
 	<string></string>
 </dict>

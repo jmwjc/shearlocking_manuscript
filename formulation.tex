@@ -1,4 +1,56 @@
 \section{Shear--locking--free FE--Meshfree formulation}
 \subsection{Reproducing kernel meshfree approximation}
-\subsection{Verification with 4-variable formulation}
-\subsection{Shear--locking--free formulation with optimal constraint ratio}
+\begin{equation}
+    \Psi_I(\boldsymbol x) = \boldsymbol c^T(\boldsymbol x_I-\boldsymbol x)\boldsymbol p(\boldsymbol x_I-\boldsymbol x)\phi(\boldsymbol x_I-\boldsymbol x)
+\end{equation}
+\begin{equation}
+    \phi(\boldsymbol x_I-\boldsymbol x) = \phi(r_{1I})\phi(r_{2I}),\quad
+    r_{iI} = \frac{\vert x_{iI}-x_i\vert}{s_i}
+\end{equation}
+\begin{equation}
+    \phi(r) = \frac{1}{3!}\left\{
+        \begin{aligned}
+            &(2-2r)^3-4(1-2r)^3 \quad& r\le \frac{1}{2} \\
+            &(2-2r)^3 & \frac{1}{2} < r \le 1 \\
+            &0 & r > 1
+        \end{aligned}
+    \right .
+\end{equation}
+\begin{equation}
+    \sum_{I=1}^{n} \Psi_I(\boldsymbol x)\boldsymbol p(\boldsymbol x_I) = \boldsymbol p(\boldsymbol x)
+\end{equation}
+or a shifted form
+\begin{equation}
+    \sum_{I=1}^n \Psi_I(\boldsymbol x) \boldsymbol p(\boldsymbol x_I-\boldsymbol x) = \boldsymbol p(\boldsymbol 0)
+\end{equation}
+\begin{equation}
+    \boldsymbol c(\boldsymbol x_I-\boldsymbol x) = \boldsymbol A^{-1}(\boldsymbol x_I-\boldsymbol x)\boldsymbol p(\boldsymbol 0)
+\end{equation}
+with
+\begin{equation}
+    \boldsymbol A(\boldsymbol x_I-\boldsymbol x) = \sum_{I=1}^n \boldsymbol p(\boldsymbol x_I-\boldsymbol x)\boldsymbol p^T(\boldsymbol x_I-\boldsymbol x)\phi(\boldsymbol x_I-\boldsymbol x)
+\end{equation}
+\begin{equation}
+    \Psi_I(\boldsymbol x) = \boldsymbol p^T(\boldsymbol 0) \boldsymbol A^{-1} \boldsymbol p(\boldsymbol x_I-\boldsymbol x)\phi(\boldsymbol x_I-\boldsymbol x)
+\end{equation}
+\subsection{Eigenvalue test for checking LBB coefficients(should be fixed)}
+To verify the optimal constraint ratios proposed in Eq. \eqref{eq:opt_n},
+the eigenvalue test of LBB coefficients \cite{bathe2001} in a square domain, shown in Figure.\ref{}, is introduced herein, where all the boundaries of this domain are clamped.
+In order to adjust the constraint ratio more flexibly, 
+the reproducing kernel meshfree approximation are used to discretize the deflection $w$ and rotation $\boldsymbol \varphi$, yields:
+\begin{equation}
+    N^w_I := \Psi_I,\; N^\varphi_K := \Psi_K^\varphi,\; N^q_R := N_R
+\end{equation}
+while, as shown in Figure.\ref{}, the meshfree nodes for $w$ and $\boldsymbol \varphi$ are different. 
+
+To meet the variational consistency of the weak formulation with meshfree approximation, the reproducing kernel gradient smoothing integration framework (RKGSI) \cite{wu2023} is used herein. 
+Accordingly, the Mindlin plate version of RKGSI framework is presented in \ref{sec:rkgsi}.
+\subsection{Shear--locking--free formulations with optimal constraint ratio}
+
+\begin{equation}
+    N^w_I := \Psi_I,\; N^\varphi_K := N_K,\; N^q_R := N_R
+\end{equation}
+FIXME
+\begin{rmk}
+The discretization of Eq. 
+\end{rmk}
